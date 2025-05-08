@@ -1,0 +1,64 @@
+.tab {
+  position: relative;
+  padding: 15px 30px 15px 20px;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  min-width: 120px;
+  height: 40px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* The right arrow for all tabs except the last one */
+.tab:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -20px;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid;
+  z-index: 1;
+}
+
+/* The left indentation for tabs after the first one */
+.tab:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid white; /* Same as background color */
+  z-index: 1;
+}
+
+.tab:not(:first-child) {
+  padding-left: 30px; /* More padding on the left for tabs with indentation */
+}
+
+.tab:not(:last-child) {
+  margin-right: 20px;
+}
+
+/*  active blue */
+.tab[data-active="true"] {
+  background-color: #3498db;
+  z-index: 3;
+}
+.tab[data-active="true"]::after {
+  border-left-color: #3498db;
+}
+
+/* Second tab - light gray */
+.tab[data-active="false"] {
+  background-color: #e6e6e6;
+  color: #777;
+  z-index: 2;
+}
+.tab[data-active="false"]::after {
+  border-left-color: #e6e6e6;
+}

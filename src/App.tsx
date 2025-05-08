@@ -3,13 +3,14 @@ import './App.css'
 import { Route, Routes } from 'react-router'
 import Home from './pages/Home'
 import type React from 'react'
+import ProjectFormPage from './pages/ProjectFormPage'
 
 
 /*
 	TODO:
-		- split Home to components
-		- make sidebar buttons functional
-		- add "add project multi-step form"
+		- split Home to components	(DONE)
+		- make sidebar buttons functional (LATER)
+		- add "add project multi-step form" (WIP)
 		- add project details page
 		- make final touches and fixes
 		- deploy (ship it 🚀 :D) 		
@@ -37,6 +38,10 @@ const App: React.FC =  () => {
 
 				<Route path='projects'>
 					<Route index element={<>Projects home</>} />
+					<Route
+						path='new'
+						element={<ProjectFormPage />}
+					/>
 					<Route
 						path=':project_id'
 						element={
