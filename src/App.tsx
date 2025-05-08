@@ -1,12 +1,22 @@
 import './App.css'
-import { useEffect, useState } from 'react'
 
 import { Route, Routes } from 'react-router'
 import Home from './pages/Home'
+import type React from 'react'
 
-// TODO: setup react router
 
-function App() {
+/*
+	TODO:
+		- split Home to components
+		- make sidebar buttons functional
+		- add "add project multi-step form"
+		- add project details page
+		- make final touches and fixes
+		- deploy (ship it 🚀 :D) 		
+*/
+
+
+const App: React.FC =  () => {
 	return (
 		<>
 			<Routes>
