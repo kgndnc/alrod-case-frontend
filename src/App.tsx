@@ -1,36 +1,50 @@
 import './App.css'
 import { useEffect, useState } from 'react'
 
-import { client } from './lib/strapi-client'
+import { Route, Routes } from 'react-router'
+import Home from './pages/Home'
+
+// TODO: setup react router
 
 function App() {
-	const [data, setData] = useState([])
-
-	useEffect(() => {
-		;(async () => {
-			try {
-				const result = await client.fetch('projects', { method: 'GET' })
-				const projects = await result.json()
-				setData(projects?.data ?? [])
-			} catch (error) {
-				console.error('Catched error')
-				console.error(error)
-				setData([])
-			}
-		})()
-	}, [])
-
-	console.log(data)
-
 	return (
 		<>
-			<p className='p-2'>Hello, World!</p>
-			<div>
-				<h2>Data from Strapi</h2>
-				<div className=''>
-					<pre>{JSON.stringify(data)}</pre>
-				</div>
-			</div>
+			<Routes>
+				<Route index element={<Home />} />
+				<Route
+					path='about'
+					element={
+						<>
+							<h1>About</h1>
+						</>
+					}
+				/>
+
+				{/* <Route element={<AuthLayout />}>
+					<Route path='login' element={<Login />} />
+					<Route path='register' element={<Register />} />
+				</Route> */}
+
+				<Route path='projects'>
+					<Route index element={<>Projects home</>} />
+					<Route
+						path=':project_id'
+						element={
+							<>
+								<p>specific project details</p>
+							</>
+						}
+					/>
+					<Route
+						path='trending'
+						element={
+							<>
+								<h1>Trending projects</h1>
+							</>
+						}
+					/>
+				</Route>
+			</Routes>
 		</>
 	)
 }
