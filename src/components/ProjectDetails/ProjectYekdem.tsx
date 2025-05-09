@@ -1,20 +1,33 @@
+import { Map } from "lucide-react";
+
 function ProjectYekdem({ display }: { display: any }) {
   return (
-    <div className="bg-gray-50 rounded-lg p-4 mb-8 flex items-center justify-between">
-      <div>
-        <div className="font-semibold text-sm">Yekdem Hakkı</div>
-        <div className="flex items-center mt-2">
-          <span className="text-gray-500 text-xs mr-3">Son Uzatma Tarihi</span>
-          <span className="text-xs">{display.yekdemTarihi}</span>
-        </div>
-        <div className="flex items-center">
-          <span className="text-gray-500 text-xs mr-3">Katkı Payı</span>
-          <span className="text-xs">{display.katkiPayi}</span>
+    <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="bg-gray-100 col-span-2 rounded-lg p-4 pr-8">
+        <div>
+          <div className="font-semibold text-blue-400 mb-4">Yekdem Hakkı</div>
+
+          <div className="content text-sm flex text-gray-500 flex-row gap-7 items-center w-full">
+            <div>
+              <span className="text-gray-500 mr-3">Son Uzatma Tarihi</span>
+              <span className="font-bold">{display.yekdemTarihi}</span>
+            </div>
+
+            <div className="h-6 w-[1px] bg-gray-500"></div>
+
+            <div>
+              <span className="text-gray-500 mr-3">Katkı Payı</span>
+              <span className="font-bold">{display.katkiPayi}</span>
+            </div>
+          </div>
         </div>
       </div>
-      <button className="bg-blue-400 text-white rounded-lg px-6 py-2 text-sm font-medium">
-        KMZ
-      </button>
+      <div className="flex items-center justify-center">
+        <button className="bg-blue-400 flex items-center justify-center gap-1 text-white rounded-2xl px-10 py-4 text-sm font-medium">
+          <Map />
+          <span>KMZ</span>
+        </button>
+      </div>
     </div>
   );
 }

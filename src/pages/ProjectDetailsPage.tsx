@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 import { client } from "../lib/strapi-client";
-import WindTurbineIcon from "../assets/WindTurbineIcon";
 import ProjectHeader from "../components/ProjectDetails/ProjectHeader";
 import ProjectTabs from "../components/ProjectDetails/ProjectTabs";
 import ProjectSubTabs from "../components/ProjectDetails/ProjectSubTabs";
@@ -13,6 +12,7 @@ import ProjectFiles from "../components/ProjectDetails/ProjectFiles";
 import ProjectGallery from "../components/ProjectDetails/ProjectGallery";
 import ProjectPortfolio from "../components/ProjectDetails/ProjectPortfolio";
 import ProjectSeller from "../components/ProjectDetails/ProjectSeller";
+import { Footer } from "../components/Footer";
 
 const MOCK_PROJECT = {
   name: "Çamlıdere Projesi",
@@ -111,7 +111,7 @@ const ProjectDetailsPage: React.FC = () => {
     : MOCK_PROJECT;
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="bg-white">
       <Header />
       <Sidebar />
       <main className="flex-1 ml-20 px-10 pt-8">
@@ -123,12 +123,7 @@ const ProjectDetailsPage: React.FC = () => {
             <ProjectHeader display={display} />
 
             {/* Main Content with Side Tabs */}
-            <ProjectTabs
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-              activeSubTab={activeSubTab}
-              setActiveSubTab={setActiveSubTab}
-            />
+
             <section className="flex">
               {/* Left Side - Tabs */}
               <div className="w-48 flex flex-col mr-6">
@@ -143,6 +138,12 @@ const ProjectDetailsPage: React.FC = () => {
 
               {/* Right Side - Content */}
               <div className="flex-1">
+                <ProjectTabs
+                  activeTab={activeTab}
+                  setActiveTab={setActiveTab}
+                  activeSubTab={activeSubTab}
+                  setActiveSubTab={setActiveSubTab}
+                />
                 {activeTab === "Tesise İlişkin Bilgiler" &&
                   activeSubTab === "Ana Kaynak" && (
                     <>
@@ -156,21 +157,30 @@ const ProjectDetailsPage: React.FC = () => {
                         selectedPhoto={selectedPhoto}
                         setSelectedPhoto={setSelectedPhoto}
                       />
-                      <ProjectPortfolio display={display} />
-                      <ProjectSeller display={display} />
                     </>
                   )}
 
                 {activeTab === "Q&A" && (
-                  <div className="p-6 bg-gray-50 rounded-lg">
+                  <div className="p-6 bg-gray-50 rounded-lg mb-4">
                     <p>Q&A section coming soon...</p>
                   </div>
                 )}
               </div>
             </section>
+
+            {/* put here */}
+
+            {activeTab === "Tesise İlişkin Bilgiler" &&
+              activeSubTab === "Ana Kaynak" && (
+                <>
+                  <ProjectPortfolio display={display} />
+                  <ProjectSeller display={display} />
+                </>
+              )}
           </div>
         )}
       </main>
+      <Footer />
     </div>
   );
 };

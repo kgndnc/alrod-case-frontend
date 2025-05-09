@@ -1,6 +1,6 @@
 import WindTurbineIcon from "../../assets/WindTurbineIcon";
-import { MapPin } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Download, MapPin, MessageSquare, SquarePen } from "lucide-react";
+import { useState } from "react";
 
 function ProjectHeader({ display }: { display: any }) {
   const [showMore, setShowMore] = useState(false);
@@ -46,14 +46,17 @@ function ProjectHeader({ display }: { display: any }) {
       </div>
       {/* Buttons */}
       <div className="flex gap-2">
-        <button className="bg-blue-400 text-white rounded-lg px-6 py-2 text-sm font-medium">
-          Lisans Bilgileri
+        <button className="bg-blue-400 text-white rounded-2xl px-6 py-4 text-sm font-medium flex items-center cursor-pointer">
+          <Download className="mr-2" />
+          <span>Lisans Bilgileri</span>
         </button>
-        <button className="bg-white border border-blue-400 text-blue-500 rounded-lg px-6 py-2 text-sm font-medium">
-          Asking Price
+        <button className="bg-blue-400 text-white rounded-2xl px-6 py-4 text-sm font-medium flex items-center cursor-pointer">
+          <MessageSquare className="mr-2" />
+          <span>Asking Price</span>
         </button>
-        <button className="bg-white border border-blue-400 text-blue-500 rounded-lg px-6 py-2 text-sm font-medium">
-          Niyet Bildir
+        <button className="bg-blue-400 text-white rounded-2xl px-6 py-4 text-sm font-medium flex items-center cursor-pointer">
+          <SquarePen className="mr-2" />
+          <span>Niyet Bildir</span>
         </button>
       </div>
     </div>

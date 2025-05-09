@@ -39,3 +39,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+body {
+  @apply max-w-screen-xl mx-auto;
+}

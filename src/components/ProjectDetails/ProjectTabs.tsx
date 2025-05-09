@@ -1,8 +1,6 @@
 function ProjectTabs({
   activeTab,
   setActiveTab,
-  activeSubTab,
-  setActiveSubTab,
 }: {
   activeTab: string;
   setActiveTab: (tab: string) => void;
@@ -10,11 +8,11 @@ function ProjectTabs({
   setActiveSubTab: (subTab: string) => void;
 }) {
   return (
-    <div className="flex border-l border-gray-200 mb-6">
+    <div className="flex border-b-2 *:not-[:last-child]:border-r-2 *:not-[:last-child]:pr-6 *:not-[:first-child]:pl-6 text-3xl font-bold border-gray-300 mb-6">
       <button
-        className={`px-4 py-2 text-left text-sm font-medium ${
+        className={`py-2 text-left border-gray-300  ${
           activeTab === "Tesise İlişkin Bilgiler"
-            ? "text-blue-500 border-l-2 border-blue-500 -ml-[1px]"
+            ? "text-blue-500"
             : "text-gray-400"
         }`}
         onClick={() => setActiveTab("Tesise İlişkin Bilgiler")}
@@ -22,10 +20,8 @@ function ProjectTabs({
         Tesise İlişkin Bilgiler
       </button>
       <button
-        className={`px-4 py-2 text-left text-sm font-medium ${
-          activeTab === "Q&A"
-            ? "text-blue-500 border-l-2 border-blue-500 -ml-[1px]"
-            : "text-gray-400"
+        className={`py-2  text-left  ${
+          activeTab === "Q&A" ? "text-blue-500" : "text-gray-400"
         }`}
         onClick={() => setActiveTab("Q&A")}
       >
