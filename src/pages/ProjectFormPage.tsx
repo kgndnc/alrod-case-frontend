@@ -288,16 +288,6 @@ function StepAnaKaynak({
     };
 
     try {
-      /*
-      const response = await client.fetch("projects", {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      */
-
       const projects = client.collection("projects");
 
       // Create a new project
