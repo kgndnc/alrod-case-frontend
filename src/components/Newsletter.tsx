@@ -1,25 +1,23 @@
 import { useState } from "react";
 
 export const Newsletter = () => {
-  const [email, setEmail] = useState("");
-
   return (
-    <section className="mb-16">
-      <div className="flex items-center gap-4 bg-gray-50 p-6 rounded-lg">
+    <section className="mb-16 w-full">
+      <div className="flex items-center justify-between gap-8 bg-gray-100 p-10 rounded-lg">
         <div className="flex-1">
-          <p className="text-gray-700 font-medium">
+          <p className="text-gray-500 font-poppins text-center">
             Helping sales, marketing and recruiting teams find new leads.
           </p>
         </div>
-        <div className="flex-1 flex gap-2">
-          <input
-            type="email"
-            placeholder="Your work e-mail here..."
-            className="flex-1 px-4 py-2 text-gray-600 border border-gray-300 rounded"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button className="bg-blue-500 cursor-pointer text-white rounded px-4 py-2 text-sm whitespace-nowrap">
+        <div className="flex-1 flex">
+          <div className="">
+            <input
+              type="email"
+              placeholder="✉ Your work e-mail here..."
+              className="flex-1 px-4 py-2 text-gray-500 font-poppins bg-white rounded font-bold text-sm w-72 focus:outline-gray-300"
+            />
+          </div>
+          <button className="bg-blue-500 cursor-pointer text-white rounded px-6 py-2 text-sm whitespace-nowrap">
             Find New Customer
           </button>
         </div>

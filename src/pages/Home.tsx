@@ -40,13 +40,12 @@ function Home() {
       <Sidebar />
 
       {/* Main Content */}
-      <main className="flex-1 ml-20 px-10 pt-8">
+      <main className="flex-1 px-10 pt-8">
         <Hero />
         {/* <FeaturedProjectsSection /> */}
         <ExploreSection />
-        <Newsletter />
       </main>
-
+      <Newsletter />
       <Footer />
     </div>
   );

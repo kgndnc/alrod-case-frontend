@@ -13,10 +13,11 @@ import ProjectDetailsPage from "./pages/ProjectDetailsPage";
   - add project details page (DONE)
   - il / ilçe seçimi data (DONE)
   - fix home page (WIP 🚧👷‍♂️)
+  - add new font (font-poppins) and preset color to tailwind.config.ts 
   - fix form 
   - make sidebar buttons functional (LATER)
   - make final touches and fixes
-		- deploy (ship it 🚀 :D) 		
+	- deploy (ship it 🚀 :D)
 */
 
 const App: React.FC = () => {

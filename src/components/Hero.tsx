@@ -21,7 +21,7 @@ export const Hero: React.FC = () => (
     {/* Çamlıdere Projesi */}
     <div className="project-card project-card-1 justify-self-end bg-white rounded-lg p-6 shadow-sm w-[335px] h-[281px]">
       <div className="flex justify-start min-h-1/3 mb-4">
-        <Droplet />
+        <Droplet size={60} />
       </div>
 
       <div className="middle">
@@ -41,9 +41,9 @@ export const Hero: React.FC = () => (
     </div>
 
     {/* Rüzgartepe Projesi */}
-    <div className="project-card project-card-3 justify-self-end bg-white rounded-lg p-6 shadow-sm w-[335px] h-[281px]">
+    <div className="project-card project-card-3 bg-white rounded-lg p-6 shadow-sm w-[335px] h-[281px]">
       <div className="flex justify-start min-h-1/3 mb-4">
-        <Wind />
+        <Wind size={60} />
       </div>
 
       <div className="middle">
