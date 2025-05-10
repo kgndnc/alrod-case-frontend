@@ -11,9 +11,9 @@ import ProjectDetailsPage from "./pages/ProjectDetailsPage";
   - split Home to components	(DONE)
   - add "add project multi-step form" (DONE)
   - add project details page (DONE)
-  - il / ilçe seçimi data
-  - fix home page
-  - fix form
+  - il / ilçe seçimi data (DONE)
+  - fix home page (WIP 🚧👷‍♂️)
+  - fix form 
   - make sidebar buttons functional (LATER)
   - make final touches and fixes
 		- deploy (ship it 🚀 :D) 		
