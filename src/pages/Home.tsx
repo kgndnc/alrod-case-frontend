@@ -35,7 +35,7 @@ const __Home = () => {
 
 function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col  bg-white">
       <Header />
       <Sidebar />
 

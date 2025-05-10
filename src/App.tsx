@@ -12,9 +12,9 @@ import ProjectDetailsPage from "./pages/ProjectDetailsPage";
   - add "add project multi-step form" (DONE)
   - add project details page (DONE)
   - il / ilçe seçimi data (DONE)
-  - fix home page (WIP 🚧👷‍♂️)
+  - fix home page (DONE)
+  - fix form (WIP 🚧👷‍♂️)
   - add new font (font-poppins) and preset color to tailwind.config.ts 
-  - fix form 
   - make sidebar buttons functional (LATER)
   - make final touches and fixes
 	- deploy (ship it 🚀 :D)

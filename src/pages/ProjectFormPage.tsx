@@ -3,6 +3,8 @@ import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 import { client } from "../lib/strapi-client";
 import il_ilce from "../data/il_ilce.json";
+import { Footer } from "../components/Footer";
+import { BatteryCharging, Bell, Factory, Folders } from "lucide-react";
 
 const ilData = il_ilce.iller;
 const ilceData = il_ilce.ilceler;
@@ -10,69 +12,35 @@ const ilceData = il_ilce.ilceler;
 // Step 1: Welcome/Info
 function StepWelcome({ onNext }: { onNext: () => void }) {
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-6 ml-2">
-        <span className="text-blue-500 font-medium">proje</span> bilgileriniz
+    <div className="w-full mx-auto mb-60">
+      <h2 className="text-3xl font-semibold mb-12">
+        <span className="text-blue-500">proje</span> bilgileriniz
       </h2>
-      <div className="bg-gray-100 rounded-2xl p-10 flex flex-row items-center justify-between  mt-2">
-        <div className="flex items-center">
-          <svg
-            width="56"
-            height="56"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="mr-4 text-blue-400"
-          >
-            <rect
-              x="3"
-              y="7"
-              width="18"
-              height="13"
-              rx="2"
-              stroke="#3B82F6"
-              strokeWidth="2"
-              fill="#fff"
-            />
-            <rect
-              x="7"
-              y="3"
-              width="10"
-              height="4"
-              rx="1"
-              stroke="#3B82F6"
-              strokeWidth="2"
-              fill="#fff"
-            />
-          </svg>
-          <span className="text-lg font-semibold text-gray-700">
-            <b>
+      <div className="bg-gray-100 rounded-2xl p-20 flex flex-row items-center justify-between gap-12 mt-2">
+        <div className="flex gap-6 items-center">
+          <Folders size={120} className="text-blue-400" />
+          <div className="text-2xl text-gray-700">
+            <b className="">
               Potansiyel alıcılarla tanışmaya sadece birkaç adım uzaklıktasınız.
-            </b>{" "}
-            Projelerinizi hemen ekleyin, doğru ilgiyi çekmesine yardımcı olalım.
-          </span>
+            </b>
+            <span>
+              &nbsp;Projelerinizi hemen ekleyin, doğru ilgiyi çekmesine yardımcı
+              olalım.
+            </span>
+          </div>
         </div>
         <button
           onClick={onNext}
-          className="bg-blue-400 text-white rounded-xl px-10 py-3 text-lg font-medium mt-0 hover:cursor-pointer"
+          className="bg-blue-500 text-white rounded-xl px-18 py-3 text-lg font-medium mt-0 hover:cursor-pointer"
         >
           Başlayın
         </button>
       </div>
-      <div className="flex items-start max-w-4xl mx-auto mt-4">
-        <div className="flex items-center mr-2 mt-1">
-          <svg
-            width="28"
-            height="28"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="text-blue-400"
-          >
-            <circle cx="12" cy="12" r="10" fill="#3B82F6" fillOpacity="0.15" />
-            <rect x="11" y="7" width="2" height="6" rx="1" fill="#3B82F6" />
-            <rect x="11" y="15" width="2" height="2" rx="1" fill="#3B82F6" />
-          </svg>
+      <div className="flex items-center max-w-4xl mx-auto mt-6">
+        <div className="flex items-center mr-4 bg-blue-400 rounded-xl p-4">
+          <Bell size={24} className="text-white fill-blue-400" />
         </div>
-        <span className="text-gray-500 text-sm">
+        <span className="text-gray-500 text-sm text-balance">
           Sistemde proje yayınlayabilmek ücretsizdir. Yayınlanması için yetki
           belgesi talep edilecektir. Devam ederek projenizi taslak olarak
           kaydedebilir ve daha sonra yetki belgenizi yükleyerek projenizi
@@ -94,17 +62,16 @@ function StepBasicInfo({
   onNext: () => void;
 }) {
   return (
-    <div className="w-full max-w-7xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-6 ml-2">
-        <span className="text-blue-500 font-medium">proje</span> bilgileriniz
+    <div className="w-full max-w-7xl mx-auto mb-60">
+      <h2 className="text-3xl font-semibold mb-6 ml-2">
+        <span className="text-blue-500">proje</span> bilgileriniz
       </h2>
       <div className="bg-gray-100 rounded-2xl p-10 mt-2">
         <div
-          className="grid gap-6 items-center grid-rows-3"
+          className="grid gap-8 items-center grid-rows-[auto_1fr_auto]"
           style={{ gridTemplateColumns: "180px 1fr 140px" }}
         >
           {/* First Column: Labels */}
-
           <label className="block text-gray-600 text-right">
             Yeni Proje Ekleyin
           </label>
@@ -116,6 +83,7 @@ function StepBasicInfo({
             onChange={(e) =>
               setFormData((f: any) => ({ ...f, projectName: e.target.value }))
             }
+            required
           />
           <div></div>
           <div></div>
@@ -125,7 +93,7 @@ function StepBasicInfo({
             {/* Üretim Tesisi */}
             <button
               type="button"
-              className={`relative flex-1 border-2 rounded-lg p-6 flex flex-col items-start justify-center min-h-[80px] text-left bg-white hover:cursor-pointer ${
+              className={`flex-1 border-2 grid gap-2 grid-cols-[1fr_auto] rounded-lg p-6 min-h-[80px] text-left bg-white hover:cursor-pointer ${
                 formData.facilityType === "Üretim Tesis"
                   ? "border-blue-400 bg-blue-50"
                   : "border-gray-300"
@@ -137,27 +105,36 @@ function StepBasicInfo({
                 }))
               }
             >
-              <input
-                type="checkbox"
-                checked={formData.facilityType === "Üretim Tesis"}
-                onChange={() =>
-                  setFormData((f: any) => ({
-                    ...f,
-                    facilityType: "Üretim Tesis",
-                  }))
-                }
-                className="absolute top-3 left-3 w-5 h-5 rounded border-2 border-gray-300 checked:border-blue-400 checked:bg-blue-400 checked:hover:bg-blue-500 transition-colors cursor-pointer"
-              />
-              <span className="ml-7 font-medium">Üretim Tesisi</span>
-              <span className="ml-7 text-xs text-gray-500 mt-1">
-                Proje gücü alt eşiği 1 MW olup, n tane {"<=1"} MW proje
-                yayınlanabilir
-              </span>
+              <div className="">
+                <label className="flex items-center gap-2 mb-2" htmlFor="">
+                  <input
+                    type="checkbox"
+                    checked={formData.facilityType === "Üretim Tesis"}
+                    onChange={() =>
+                      setFormData((f: any) => ({
+                        ...f,
+                        facilityType: "Üretim Tesis",
+                      }))
+                    }
+                    className="w-5 h-5 rounded border-2 border-gray-300 checked:border-blue-400 checked:bg-blue-400 checked:hover:bg-blue-500 transition-colors cursor-pointer"
+                  />
+                  <span className="font-medium">Üretim Tesisi</span>
+                </label>
+
+                <span className="text-sm text-gray-500 mt-1">
+                  Proje gücü alt eşiği 1 MW olup, n tane {"<=1"} MW proje
+                  yayınlanabilir
+                </span>
+              </div>
+              <div className="text-blue-500">
+                <Factory size={32} />
+              </div>
             </button>
             {/* Müstakil Batarya Tesisi */}
+
             <button
               type="button"
-              className={`relative flex-1 border-2 rounded-lg p-6 flex flex-col items-start justify-center min-h-[80px] text-left bg-white hover:cursor-pointer ${
+              className={`flex-1 border-2 grid gap-2 grid-cols-[1fr_auto] rounded-lg p-6 min-h-[80px] text-left bg-white hover:cursor-pointer ${
                 formData.facilityType === "Müstakil Batarya Tesis"
                   ? "border-blue-400 bg-blue-50"
                   : "border-gray-300"
@@ -169,19 +146,25 @@ function StepBasicInfo({
                 }))
               }
             >
-              <input
-                type="checkbox"
-                checked={formData.facilityType === "Müstakil Batarya Tesis"}
-                onChange={() =>
-                  setFormData((f: any) => ({
-                    ...f,
-                    facilityType: "Müstakil Batarya Tesis",
-                  }))
-                }
-                className="absolute top-3 left-3 w-5 h-5 rounded border-2 border-gray-300 checked:border-blue-400 checked:bg-blue-400 checked:hover:bg-blue-500 transition-colors cursor-pointer"
-              />
-
-              <span className="ml-7 font-medium">Müstakil Batarya Tesisi</span>
+              <div className="">
+                <label className="flex items-center gap-2 mb-2" htmlFor="">
+                  <input
+                    type="checkbox"
+                    checked={formData.facilityType === "Müstakil Batarya Tesis"}
+                    onChange={() =>
+                      setFormData((f: any) => ({
+                        ...f,
+                        facilityType: "Müstakil Batarya Tesis",
+                      }))
+                    }
+                    className="w-5 h-5 rounded border-2 border-gray-300 checked:border-blue-400 checked:bg-blue-400 checked:hover:bg-blue-500 transition-colors cursor-pointer"
+                  />
+                  <span className="font-medium">Müstakil Batarya Tesisi</span>
+                </label>
+              </div>
+              <div className="text-blue-500">
+                <BatteryCharging size={32} />
+              </div>
             </button>
           </div>
           <div></div>
@@ -241,7 +224,7 @@ function StepBasicInfo({
           <div className="">
             <button
               onClick={onNext}
-              className="bg-blue-400 text-white rounded-xl px-10 py-3 text-lg font-medium hover:cursor-pointer"
+              className="bg-blue-500 text-white rounded-xl px-10 py-3 text-lg font-medium hover:cursor-pointer"
             >
               Devam
             </button>
@@ -740,8 +723,6 @@ const ProjectFormPage: React.FC = () => {
     teaserFile: null,
   });
 
-  console.log(formData);
-
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <Header />
@@ -764,6 +745,7 @@ const ProjectFormPage: React.FC = () => {
         )}
         {/* Add more steps here as needed */}
       </main>
+      <Footer />
     </div>
   );
 };
