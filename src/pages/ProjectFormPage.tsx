@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 import { client } from "../lib/strapi-client";
+import il_ilce from "../data/il_ilce.json";
+
+const ilData = il_ilce.iller;
+const ilceData = il_ilce.ilceler;
 
 // Step 1: Welcome/Info
 function StepWelcome({ onNext }: { onNext: () => void }) {
@@ -258,31 +262,33 @@ function StepAnaKaynak({
   setFormData: React.Dispatch<React.SetStateAction<any>>;
   onSubmit: () => void;
 }) {
-  // Dummy state for selects/inputs
-  const [sourceType, setSourceType] = useState("Biyokütle/Biyogaz");
-  const [projectStatus, setProjectStatus] = useState(
-    "Proje (sadece Lisans ya da Çağrı Mektubu alınmıştır)"
-  );
-  const [installedPower, setInstalledPower] = useState("");
-  const [operationalPower, setOperationalPower] = useState("");
-  const [powerUnit, setPowerUnit] = useState("MWe");
   const [activeTab, setActiveTab] = useState("Ana Kaynak");
 
-  // State for Katkı Payı radio
-  const [katkiPayi, setKatkiPayi] = useState("");
-  const [katkiPayiValue, setKatkiPayiValue] = useState("");
+  const [anaKaynakFormData, setAnaKaynakFormData] = useState({
+    sourceType: "Biyokütle/Biyogaz",
+    projectStatus: "Proje (sadece Lisans ya da Çağrı Mektubu alınmıştır)",
+    installedPower: "",
+    operationalPower: "",
+    powerUnit: "MWe",
+    katkiPayi: "Var",
+    katkiPayiValue: "",
+    ilId: "",
+    ilceId: "",
+  });
 
   // Add a submit handler
   const handleSubmit = async () => {
     const payload = {
       data: {
         ...formData,
-        sourceType,
-        projectStatus,
-        installedPower,
-        operationalPower,
-        katkiPayi,
-        katkiPayiValue,
+        sourceType: anaKaynakFormData.sourceType,
+        projectStatus: anaKaynakFormData.projectStatus,
+        installedPower: anaKaynakFormData.installedPower,
+        operationalPower: anaKaynakFormData.operationalPower,
+        katkiPayi: anaKaynakFormData.katkiPayi,
+        katkiPayiValue: anaKaynakFormData.katkiPayiValue,
+        ilId: anaKaynakFormData.ilId,
+        ilceId: anaKaynakFormData.ilceId,
         // add other local state fields if needed
       },
     };
@@ -362,8 +368,13 @@ function StepAnaKaynak({
                     Tesis/Proje Kaynak Türü
                   </label>
                   <select
-                    value={sourceType}
-                    onChange={(e) => setSourceType(e.target.value)}
+                    value={anaKaynakFormData.sourceType}
+                    onChange={(e) =>
+                      setAnaKaynakFormData((f: any) => ({
+                        ...f,
+                        sourceType: e.target.value,
+                      }))
+                    }
                     className="w-full p-3 rounded-lg border border-gray-300"
                   >
                     <option>Biyokütle/Biyogaz</option>
@@ -384,8 +395,13 @@ function StepAnaKaynak({
                     </span>
                   </label>
                   <select
-                    value={projectStatus}
-                    onChange={(e) => setProjectStatus(e.target.value)}
+                    value={anaKaynakFormData.projectStatus}
+                    onChange={(e) =>
+                      setAnaKaynakFormData((f: any) => ({
+                        ...f,
+                        projectStatus: e.target.value,
+                      }))
+                    }
                     className="w-full p-3 rounded-lg border border-gray-300"
                   >
                     <option>
@@ -403,8 +419,13 @@ function StepAnaKaynak({
                   </label>
                   <div className="flex gap-2">
                     <input
-                      value={installedPower}
-                      onChange={(e) => setInstalledPower(e.target.value)}
+                      value={anaKaynakFormData.installedPower}
+                      onChange={(e) =>
+                        setAnaKaynakFormData((f: any) => ({
+                          ...f,
+                          installedPower: e.target.value,
+                        }))
+                      }
                       className="w-32 p-3 rounded-lg border border-gray-300"
                       placeholder="MWe"
                     />
@@ -427,8 +448,13 @@ function StepAnaKaynak({
                   </label>
                   <div className="flex gap-2">
                     <input
-                      value={operationalPower}
-                      onChange={(e) => setOperationalPower(e.target.value)}
+                      value={anaKaynakFormData.operationalPower}
+                      onChange={(e) =>
+                        setAnaKaynakFormData((f: any) => ({
+                          ...f,
+                          operationalPower: e.target.value,
+                        }))
+                      }
                       className="w-32 p-3 rounded-lg border border-gray-300"
                       placeholder="MWe"
                     />
@@ -529,8 +555,13 @@ function StepAnaKaynak({
                       type="radio"
                       name="katkiPayi"
                       value="Var"
-                      checked={katkiPayi === "Var"}
-                      onChange={(e) => setKatkiPayi(e.target.value)}
+                      checked={anaKaynakFormData.katkiPayi === "Var"}
+                      onChange={(e) =>
+                        setAnaKaynakFormData((f: any) => ({
+                          ...f,
+                          katkiPayi: e.target.value,
+                        }))
+                      }
                       className="appearance-none w-5 h-5 border-2 border-gray-300 rounded checked:bg-blue-400 checked:border-blue-400"
                     />
                     <span className="text-gray-600 font-medium ml-2">Var</span>
@@ -540,24 +571,38 @@ function StepAnaKaynak({
                       type="radio"
                       name="katkiPayi"
                       value="Yok"
-                      checked={katkiPayi === "Yok"}
-                      onChange={(e) => setKatkiPayi(e.target.value)}
+                      checked={anaKaynakFormData.katkiPayi === "Yok"}
+                      onChange={(e) =>
+                        setAnaKaynakFormData((f: any) => ({
+                          ...f,
+                          katkiPayi: e.target.value,
+                        }))
+                      }
                       className="appearance-none w-5 h-5 border-2 border-gray-300 rounded checked:bg-blue-400 checked:border-blue-400"
                     />
                     <span className="text-gray-600 font-medium ml-2">Yok</span>
                   </label>
                 </div>
               </div>
-              <div className={`${katkiPayi === "Var" ? "" : "opacity-50"}`}>
+              <div
+                className={`${
+                  anaKaynakFormData.katkiPayi === "Var" ? "" : "opacity-50"
+                }`}
+              >
                 <span className="block text-gray-600 font-medium mb-2">
                   Katkı Payı (varsa)
                 </span>
                 <input
                   className="w-40 p-3 rounded-lg border border-gray-300"
                   placeholder="Birim Seçin"
-                  value={katkiPayiValue}
-                  onChange={(e) => setKatkiPayiValue(e.target.value)}
-                  disabled={katkiPayi !== "Var"}
+                  value={anaKaynakFormData.katkiPayiValue}
+                  onChange={(e) =>
+                    setAnaKaynakFormData((f: any) => ({
+                      ...f,
+                      katkiPayiValue: e.target.value,
+                    }))
+                  }
+                  disabled={anaKaynakFormData.katkiPayi !== "Var"}
                 />
               </div>
             </div>
@@ -570,23 +615,43 @@ function StepAnaKaynak({
             </span>
             <div className="grid grid-cols-2 gap-8 mb-6">
               <div className="flex gap-4">
-                <select className="p-3 rounded-lg border border-gray-300 w-40">
-                  <option>İl Seçiniz</option>
-                  <option>İstanbul</option>
-                  <option>Ankara</option>
-                  <option>İzmir</option>
-                  <option>Adana</option>
-                  <option>Adıyaman</option>
-                  <option>Afyonkarahisar</option>
-                  <option>Amasya</option>
+                <select
+                  className="p-3 rounded-lg border border-gray-300 w-40"
+                  value={anaKaynakFormData.ilId}
+                  onChange={(e) =>
+                    setAnaKaynakFormData((f: any) => ({
+                      ...f,
+                      ilId: e.target.value,
+                    }))
+                  }
+                >
+                  <option value={""}>İl Seçin</option>
+                  {/* il data */}
+                  {ilData.map((il) => (
+                    <option key={il.id} value={il.id}>
+                      {il.name}
+                    </option>
+                  ))}
                 </select>
-                <select className="p-3 rounded-lg border border-gray-300 w-40">
-                  <option>İlçe Seçiniz</option>
-                  <option>Çankaya</option>
-                  <option>Yenimahalle</option>
-                  <option>Beşiktaş</option>
-                  <option>Kadıköy</option>
-                  <option>Kartal</option>
+                <select
+                  className="p-3 rounded-lg border border-gray-300 w-40"
+                  value={anaKaynakFormData.ilceId}
+                  onChange={(e) =>
+                    setAnaKaynakFormData((f: any) => ({
+                      ...f,
+                      ilceId: e.target.value,
+                    }))
+                  }
+                >
+                  <option value={""}>İlçe Seçin</option>
+                  {/* ilce data */}
+                  {ilceData
+                    .filter((ilce) => ilce.il_id === anaKaynakFormData.ilId)
+                    .map((ilce) => (
+                      <option key={ilce.id} value={ilce.id}>
+                        {ilce.name}
+                      </option>
+                    ))}
                 </select>
               </div>
               <div>

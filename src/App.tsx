@@ -8,11 +8,14 @@ import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 
 /*
 	TODO:
-		- split Home to components	(DONE)
-		- make sidebar buttons functional (LATER)
-		- add "add project multi-step form" (DONE)
-		- add project details page (WIP)
-		- make final touches and fixes
+  - split Home to components	(DONE)
+  - add "add project multi-step form" (DONE)
+  - add project details page (DONE)
+  - il / ilçe seçimi data
+  - fix home page
+  - fix form
+  - make sidebar buttons functional (LATER)
+  - make final touches and fixes
 		- deploy (ship it 🚀 :D) 		
 */
 
