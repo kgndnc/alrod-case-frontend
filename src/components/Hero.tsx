@@ -3,9 +3,9 @@ import { Droplet } from "lucide-react";
 import type React from "react";
 
 export const Hero: React.FC = () => (
-  <div className="list mb-20 text-[#5A5B5E]">
+  <div className="list mb-32 text-[#5A5B5E]">
     <section className="grid -mt-8 grid-cols-[4fr_1fr] w-full grid-rows-2 hero-banner">
-      <h1 className="text-5xl font-bold col-span-2">
+      <h1 className="text-5xl ml-16 font-bold col-span-2">
         <span className="text-blue-500">energy</span>
         <span> starts here</span>
       </h1>

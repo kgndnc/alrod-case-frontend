@@ -42,7 +42,7 @@ function Home() {
       {/* Main Content */}
       <main className="flex-1 ml-20 px-10 pt-8">
         <Hero />
-        <FeaturedProjectsSection />
+        {/* <FeaturedProjectsSection /> */}
         <ExploreSection />
         <Newsletter />
       </main>
