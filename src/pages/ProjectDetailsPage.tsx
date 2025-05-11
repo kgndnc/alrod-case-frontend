@@ -123,7 +123,6 @@ const ProjectDetailsPage: React.FC = () => {
       }
     : MOCK_PROJECT;
 
-  console.log(display);
 
   return (
     <div className="bg-white">

@@ -31,15 +31,15 @@ function ProjectInfoGrid({ display }: { display: any }) {
       <div className="flex-1 grid grid-cols-2 gap-4">
         {/* Kabul Bilgileri */}
         <div className="bg-gray-50 rounded-lg p-4">
-          <div className="font-semibold mb-2 text-blue-400 text-sm">
+          <div className="font-semibold mb-2 text-primary-blue text-sm">
             Kabul Bilgileri
           </div>
-          <div className="text-gray-500 text-sm">İşletmede</div>
+          <div className="text-primary-gray text-sm">İşletmede</div>
           <hr className="my-2 w-1/6 border-gray-500" />
           {display?.kabulBilgisi?.map((item: any, index: any) => {
-            console.log(item);
+            
             return (
-              <div key={index} className="text-gray-500 font-normal text-sm">
+              <div key={index} className="text-primary-gray font-normal text-sm">
                 {Intl.DateTimeFormat("tr-TR").format(new Date(item.date)) ??
                   "Tarih yok"}{" "}
                 <span className="ml-1 font-semibold">{item.mwe} MWe</span>
@@ -50,11 +50,11 @@ function ProjectInfoGrid({ display }: { display: any }) {
 
         {/* Elektrik Satışı */}
         <div className="bg-gray-50 rounded-lg p-4">
-          <div className="font-semibold mb-4 text-blue-400 text-sm">
+          <div className="font-semibold mb-4 text-primary-blue text-sm">
             Elektrik Satışı
           </div>
           {display?.elektrikSatisi?.map((item: any, index: any) => (
-            <div key={index} className="text-gray-500 font-normal text-sm">
+            <div key={index} className="text-primary-gray font-normal text-sm">
               {Intl.DateTimeFormat("tr-TR").format(new Date(item.date)) ??
                 "Tarih yok"}{" "}
               <span className="ml-1 font-semibold">{item.mwe} MWe</span>

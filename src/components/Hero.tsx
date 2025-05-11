@@ -6,14 +6,14 @@ export const Hero: React.FC = () => (
   <div className="list mb-32 text-[#5A5B5E]">
     <section className="grid -mt-8 grid-cols-[4fr_1fr] w-full grid-rows-2 hero-banner">
       <h1 className="text-5xl ml-16 font-bold col-span-2">
-        <span className="text-blue-500">energy</span>
+        <span className="text-primary-blue">energy</span>
         <span> starts here</span>
       </h1>
       <p className="pl-28 mb-4 max-w-lg">
         The Only Best marketplace to buy or sell a project, find energy project
         that interest you
       </p>
-      <button className="bg-blue-500 text-white rounded-full mr-2 justify-self-end px-8 py-2 w-32 h-14">
+      <button className="bg-primary-blue text-white rounded-full mr-2 justify-self-end px-8 py-2 w-32 h-14">
         Join Us
       </button>
     </section>
@@ -64,8 +64,8 @@ export const Hero: React.FC = () => (
 
     {/* Pagination Dots */}
     <div className="pagination-dots flex gap-4 justify-center">
-      <div className="w-12 h-12 bg-blue-500 rounded-full"></div>
-      <div className="w-12 h-12 bg-blue-400 rounded-full"></div>
+      <div className="w-12 h-12 bg-primary-blue rounded-full"></div>
+      <div className="w-12 h-12 bg-primary-blue rounded-full"></div>
     </div>
   </div>
 );

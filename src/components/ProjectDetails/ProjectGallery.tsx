@@ -11,7 +11,7 @@ function ProjectGallery({
 }) {
   return (
     <div className="mb-8 bg-gray-100 rounded-lg p-5">
-      <div className="font-semibold mb-4 text-blue-400 ">Fotoğraflar</div>
+      <div className="font-semibold mb-4 text-primary-blue ">Fotoğraflar</div>
       <div className="space-y-4">
         {/* Main large photo */}
         <div className="relative h-80 rounded-lg overflow-hidden">
@@ -59,7 +59,7 @@ function ProjectGallery({
                 <div
                   key={idx}
                   className={`flex-shrink-0 w-32 h-20 rounded-lg overflow-hidden ${
-                    selectedPhoto === idx ? "border-2 border-blue-400" : ""
+                    selectedPhoto === idx ? "border-2 border-primary-blue" : ""
                   }`}
                   onClick={() => setSelectedPhoto(idx)}
                 >

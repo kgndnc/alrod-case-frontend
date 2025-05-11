@@ -13,9 +13,9 @@ import ProjectDetailsPage from "./pages/ProjectDetailsPage";
   - add project details page (DONE)
   - il / ilçe seçimi data (DONE)
   - fix home page (DONE)
-  - fix form (WIP 🚧👷‍♂️)
-  - list project details on card click
-  - add new font (font-poppins) and preset color to tailwind.config.ts 
+  - fix form (DONE)
+  - list project details on card click (DONE)
+  - add new font (font-poppins) and preset color to tailwind (DONE) 
   - make sidebar buttons functional (LATER)
   - make final touches and fixes
 	- deploy (ship it 🚀 :D)
@@ -44,14 +44,6 @@ const App: React.FC = () => {
           <Route index element={<>Projects home</>} />
           <Route path="new" element={<ProjectFormPage />} />
           <Route path=":project_id" element={<ProjectDetailsPage />} />
-          <Route
-            path="trending"
-            element={
-              <>
-                <h1>Trending projects</h1>
-              </>
-            }
-          />
         </Route>
       </Routes>
     </>

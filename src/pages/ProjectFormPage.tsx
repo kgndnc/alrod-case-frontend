@@ -16,11 +16,11 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
   return (
     <div className="w-full mx-auto mb-60">
       <h2 className="text-3xl font-semibold mb-12">
-        <span className="text-blue-500">proje</span> bilgileriniz
+        <span className="text-primary-blue">proje</span> bilgileriniz
       </h2>
       <div className="bg-gray-100 rounded-2xl p-20 flex flex-row items-center justify-between gap-12 mt-2">
         <div className="flex gap-6 items-center">
-          <Folders size={120} className="text-blue-400" />
+          <Folders size={120} className="text-primary-blue" />
           <div className="text-2xl text-gray-700">
             <b className="">
               Potansiyel alıcılarla tanışmaya sadece birkaç adım uzaklıktasınız.
@@ -33,16 +33,16 @@ function StepWelcome({ onNext }: { onNext: () => void }) {
         </div>
         <button
           onClick={onNext}
-          className="bg-blue-500 text-white rounded-xl px-18 py-3 text-lg font-medium mt-0 hover:cursor-pointer"
+          className="bg-primary-blue text-white rounded-xl px-18 py-3 text-lg font-medium mt-0 hover:cursor-pointer"
         >
           Başlayın
         </button>
       </div>
       <div className="flex items-center max-w-4xl mx-auto mt-6">
-        <div className="flex items-center mr-4 bg-blue-400 rounded-xl p-4">
-          <Bell size={24} className="text-white fill-blue-400" />
+        <div className="flex items-center mr-4 bg-primary-blue rounded-xl p-4">
+          <Bell size={24} className="text-white fill-primary-blue" />
         </div>
-        <span className="text-gray-500 text-sm text-balance">
+        <span className="text-primary-gray text-sm text-balance">
           Sistemde proje yayınlayabilmek ücretsizdir. Yayınlanması için yetki
           belgesi talep edilecektir. Devam ederek projenizi taslak olarak
           kaydedebilir ve daha sonra yetki belgenizi yükleyerek projenizi
@@ -82,7 +82,7 @@ function StepBasicInfo({
   return (
     <div className="w-full max-w-7xl mx-auto mb-60">
       <h2 className="text-3xl font-semibold mb-6 ml-2">
-        <span className="text-blue-500">proje</span> bilgileriniz
+        <span className="text-primary-blue">proje</span> bilgileriniz
       </h2>
       <div className="bg-gray-100 rounded-2xl p-10 mt-2">
         <div
@@ -90,12 +90,12 @@ function StepBasicInfo({
           style={{ gridTemplateColumns: "180px 1fr 140px" }}
         >
           {/* First Column: Labels */}
-          <label className="block text-gray-600 text-right">
+          <label className="block text-primary-gray text-right">
             Yeni Proje Ekleyin
           </label>
           {/* Project Name Input */}
           <input
-            className="w-full indent-4 placeholder:text-sm placeholder:font-semibold p-4 rounded-xl border-2 bg-white border-gray-300 focus:outline-blue-400 text-lg"
+            className="w-full indent-4 placeholder:text-sm placeholder:font-semibold p-4 rounded-xl border-2 bg-white border-gray-300 focus:outline-primary-blue text-lg"
             placeholder="Proje Adı"
             value={formData.projectName}
             name="projectName"
@@ -115,7 +115,7 @@ function StepBasicInfo({
               type="button"
               className={`flex-1 border-2 grid gap-2 grid-cols-[1fr_auto] rounded-lg p-6 min-h-[80px] text-left bg-white hover:cursor-pointer ${
                 formData.facilityType === "Üretim Tesis"
-                  ? "border-blue-400 bg-blue-50"
+                  ? "border-primary-blue bg-blue-50"
                   : "border-gray-300"
               }`}
               onClick={() =>
@@ -136,17 +136,17 @@ function StepBasicInfo({
                         facilityType: "Üretim Tesis",
                       }))
                     }
-                    className="w-5 h-5 rounded border-2 border-gray-300 checked:border-blue-400 checked:bg-blue-400 checked:hover:bg-blue-500 transition-colors cursor-pointer"
+                    className="w-5 h-5 rounded border-2 border-gray-300 checked:border-primary-blue checked:bg-primary-blue checked:hover:bg-primary-blue transition-colors cursor-pointer"
                   />
                   <span className="font-medium">Üretim Tesisi</span>
                 </label>
 
-                <span className="text-sm text-gray-500 mt-1">
+                <span className="text-sm text-primary-gray mt-1">
                   Proje gücü alt eşiği 1 MW olup, n tane {"<=1"} MW proje
                   yayınlanabilir
                 </span>
               </div>
-              <div className="text-blue-500">
+              <div className="text-primary-blue">
                 <Factory size={32} />
               </div>
             </button>
@@ -156,7 +156,7 @@ function StepBasicInfo({
               type="button"
               className={`flex-1 border-2 grid gap-2 grid-cols-[1fr_auto] rounded-lg p-6 min-h-[80px] text-left bg-white hover:cursor-pointer ${
                 formData.facilityType === "Müstakil Batarya Tesis"
-                  ? "border-blue-400 bg-blue-50"
+                  ? "border-primary-blue bg-blue-50"
                   : "border-gray-300"
               }`}
               onClick={() =>
@@ -177,18 +177,18 @@ function StepBasicInfo({
                         facilityType: "Müstakil Batarya Tesis",
                       }))
                     }
-                    className="w-5 h-5 rounded border-2 border-gray-300 checked:border-blue-400 checked:bg-blue-400 checked:hover:bg-blue-500 transition-colors cursor-pointer"
+                    className="w-5 h-5 rounded border-2 border-gray-300 checked:border-primary-blue checked:bg-primary-blue checked:hover:bg-primary-blue transition-colors cursor-pointer"
                   />
                   <span className="font-medium">Müstakil Batarya Tesisi</span>
                 </label>
               </div>
-              <div className="text-blue-500">
+              <div className="text-primary-blue">
                 <BatteryCharging size={32} />
               </div>
             </button>
           </div>
           <div></div>
-          <label className="block text-gray-600 text-right">
+          <label className="block text-primary-gray text-right">
             Yeni Proje Hangi Aşamadadır?
           </label>
           {/* Stage Buttons */}
@@ -198,7 +198,7 @@ function StepBasicInfo({
               <div
                 className={`relative border-2 rounded-lg p-6 flex items-center justify-start min-h-[60px] bg-white hover:cursor-pointer ${
                   formData.stage === "Lisanslı"
-                    ? "border-blue-400 bg-blue-50"
+                    ? "border-primary-blue bg-blue-50"
                     : "border-gray-300"
                 }`}
               >
@@ -221,7 +221,7 @@ function StepBasicInfo({
               <div
                 className={`relative border-2 rounded-lg p-6 flex items-center justify-start min-h-[60px] bg-white hover:cursor-pointer ${
                   formData.stage === "Lisanssız"
-                    ? "border-blue-400 bg-blue-50"
+                    ? "border-primary-blue bg-blue-50"
                     : "border-gray-300"
                 }`}
               >
@@ -244,7 +244,7 @@ function StepBasicInfo({
           <div className="">
             <button
               onClick={handleNext}
-              className="bg-blue-500 text-white rounded-xl px-10 py-3 text-lg font-medium hover:cursor-pointer"
+              className="bg-primary-blue text-white rounded-xl px-10 py-3 text-lg font-medium hover:cursor-pointer"
             >
               Devam
             </button>
@@ -292,7 +292,6 @@ function StepAnaKaynak({
         details: { ...formData, acceptanceInfo }, // Include acceptance info in details
       });
 
-      console.log({ newProject });
 
       if (newProject.data.documentId) {
         alert("Proje başarıyla gönderildi!");
@@ -309,7 +308,7 @@ function StepAnaKaynak({
     <div className="w-full max-w-7xl mx-auto">
       {/* Stepper */}
       <h2 className="text-2xl font-semibold mb-6 ml-2">
-        <span className="text-blue-500 font-medium">tesise</span> ilişkin
+        <span className="text-primary-blue font-medium">tesise</span> ilişkin
         bilgiler
       </h2>
       <div className="flex items-center gap-2 mb-8 ml-2">
@@ -317,8 +316,8 @@ function StepAnaKaynak({
           data-active={activeTab === "Ana Kaynak"}
           className={`tab px-8 py-8 rounded-tl-xl rounded-bl-xl text-white font-medium ${
             activeTab === "Ana Kaynak"
-              ? "bg-blue-400"
-              : "bg-blue-100 text-blue-400"
+              ? "bg-primary-blue"
+              : "bg-blue-100 text-primary-blue"
           }`}
           onClick={() => setActiveTab("Ana Kaynak")}
         >
@@ -328,8 +327,8 @@ function StepAnaKaynak({
           data-active={activeTab === "Yardımcı Kaynak"}
           className={`tab px-8 py-8 font-medium ${
             activeTab === "Yardımcı Kaynak"
-              ? "bg-blue-400 text-white"
-              : "bg-blue-100 text-blue-400"
+              ? "bg-primary-blue text-white"
+              : "bg-blue-100 text-primary-blue"
           }`}
           onClick={() => setActiveTab("Yardımcı Kaynak")}
         >
@@ -339,8 +338,8 @@ function StepAnaKaynak({
           data-active={activeTab === "BESS"}
           className={`tab px-8 py-8 rounded-tr-xl rounded-br-xl font-medium ${
             activeTab === "BESS"
-              ? "bg-blue-400 text-white"
-              : "bg-blue-100 text-blue-400"
+              ? "bg-primary-blue text-white"
+              : "bg-blue-100 text-primary-blue"
           }`}
           onClick={() => setActiveTab("BESS")}
         >
@@ -354,7 +353,7 @@ function StepAnaKaynak({
             <div className="flex-1">
               <div className="grid grid-cols-2 gap-8 mb-6">
                 <div>
-                  <label className="block text-gray-600 font-medium mb-2">
+                  <label className="block text-primary-gray font-medium mb-2">
                     Tesis/Proje Kaynak Türü
                   </label>
                   <select
@@ -375,10 +374,10 @@ function StepAnaKaynak({
                   </select>
                 </div>
                 <div>
-                  <label className="block text-gray-600 font-medium mb-2">
+                  <label className="block text-primary-gray font-medium mb-2">
                     Tesis/Proje Durumu{" "}
                     <span
-                      className="text-blue-400 cursor-pointer"
+                      className="text-primary-blue cursor-pointer"
                       title="Bilgi"
                     >
                       &#9432;
@@ -404,7 +403,7 @@ function StepAnaKaynak({
               </div>
               <div className="grid grid-cols-2 gap-8 mb-6">
                 <div>
-                  <label className="block text-gray-600 font-medium mb-2">
+                  <label className="block text-primary-gray font-medium mb-2">
                     Kurulu Güç
                   </label>
                   <div className="flex gap-2">
@@ -427,10 +426,10 @@ function StepAnaKaynak({
                   </div>
                 </div>
                 <div>
-                  <label className="block text-gray-600 font-medium mb-2">
+                  <label className="block text-primary-gray font-medium mb-2">
                     İşletmedeki Güç{" "}
                     <span
-                      className="text-blue-400 cursor-pointer"
+                      className="text-primary-blue cursor-pointer"
                       title="Bilgi"
                     >
                       &#9432;
@@ -459,7 +458,7 @@ function StepAnaKaynak({
             </div>
             {/* Info box on the right */}
             <div className="w-72 flex items-end">
-              <div className="bg-white rounded-xl p-4 text-gray-500 text-sm border border-gray-200">
+              <div className="bg-white rounded-xl p-4 text-primary-gray text-sm border border-gray-200">
                 <span className="font-medium text-gray-700 block mb-2">
                   Lisans dereceli toplam gücü yazınız.
                 </span>
@@ -472,7 +471,7 @@ function StepAnaKaynak({
           <div className="bg-gray-100 rounded-2xl p-8 mb-8">
             <div className="grid grid-cols-2 gap-8 mb-6">
               <div>
-                <label className="block text-gray-600 font-medium mb-2">
+                <label className="block text-primary-gray font-medium mb-2">
                   Kabul Bilgileri
                 </label>
                 <select className="w-full p-3 rounded-lg border border-gray-300 mb-4">
@@ -545,13 +544,13 @@ function StepAnaKaynak({
                   />
                   <button
                     onClick={handleAddAcceptance}
-                    className="bg-blue-400 text-white rounded-lg px-6 py-2 font-medium hover:cursor-pointer"
+                    className="bg-primary-blue text-white rounded-lg px-6 py-2 font-medium hover:cursor-pointer"
                   >
                     Ekle
                   </button>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-gray-600 font-semibold text-right text-sm">
+                  <span className="text-primary-gray font-semibold text-right text-sm">
                     YEKDEM son yararlanma takvim yılı/dönemi
                   </span>
                   <select
@@ -573,7 +572,7 @@ function StepAnaKaynak({
                       </option>
                     ))}
                   </select>
-                  <span className="text-blue-400 cursor-pointer" title="Bilgi">
+                  <span className="text-primary-blue cursor-pointer" title="Bilgi">
                     &#9432;
                   </span>
                 </div>
@@ -585,7 +584,7 @@ function StepAnaKaynak({
           <div className="bg-gray-100 rounded-2xl p-8 mb-8">
             <div className="grid grid-cols-3 gap-6 mb-4 items-end">
               <div>
-                <span className="block text-gray-600 font-medium mb-2">
+                <span className="block text-primary-gray font-medium mb-2">
                   Elektrik Satışı
                 </span>
                 <label className="flex items-center gap-2 bg-white rounded-lg p-8">
@@ -600,13 +599,13 @@ function StepAnaKaynak({
                     }
                     className="w-5 h-5 rounded border-2 border-gray-300"
                   />
-                  <span className="text-gray-600 font-medium">
+                  <span className="text-primary-gray font-medium">
                     Kapasite Artış İmkanı
                   </span>
                 </label>
               </div>
               <div>
-                <span className="block text-gray-600 font-medium mb-2">
+                <span className="block text-primary-gray font-medium mb-2">
                   Katkı Payı
                 </span>
                 <div className="flex gap-4 bg-white rounded-lg p-8">
@@ -622,9 +621,9 @@ function StepAnaKaynak({
                           katkiPayi: e.target.value,
                         }))
                       }
-                      className="appearance-none w-5 h-5 border-2 border-gray-300 rounded checked:bg-blue-400 checked:border-blue-400"
+                      className="appearance-none w-5 h-5 border-2 border-gray-300 rounded checked:bg-primary-blue checked:border-primary-blue"
                     />
-                    <span className="text-gray-600 font-medium ml-2">Var</span>
+                    <span className="text-primary-gray font-medium ml-2">Var</span>
                   </label>
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
@@ -638,9 +637,9 @@ function StepAnaKaynak({
                           katkiPayi: e.target.value,
                         }))
                       }
-                      className="appearance-none w-5 h-5 border-2 border-gray-300 rounded checked:bg-blue-400 checked:border-blue-400"
+                      className="appearance-none w-5 h-5 border-2 border-gray-300 rounded checked:bg-primary-blue checked:border-primary-blue"
                     />
-                    <span className="text-gray-600 font-medium ml-2">Yok</span>
+                    <span className="text-primary-gray font-medium ml-2">Yok</span>
                   </label>
                 </div>
               </div>
@@ -649,7 +648,7 @@ function StepAnaKaynak({
                   formData.katkiPayi === "Var" ? "" : "opacity-50"
                 }`}
               >
-                <span className="block text-gray-600 font-medium mb-2">
+                <span className="block text-primary-gray font-medium mb-2">
                   Katkı Payı (varsa)
                 </span>
                 <input
@@ -670,7 +669,7 @@ function StepAnaKaynak({
 
           {/* 4th Section: Proje Lokasyonu, File Upload */}
           <div className="bg-gray-100 rounded-2xl p-8 mb-8">
-            <span className="block text-gray-600 font-medium mb-4">
+            <span className="block text-primary-gray font-medium mb-4">
               Proje Lokasyonu
             </span>
             <div className="grid grid-cols-2 gap-8 mb-6">
@@ -715,10 +714,10 @@ function StepAnaKaynak({
                 </select>
               </div>
               <div>
-                <label className="block text-gray-600 font-medium mb-2">
+                <label className="block text-primary-gray font-medium mb-2">
                   Proje Lokasyon KMZ Yükleyin.
                 </label>
-                <label className="flex flex-col items-center justify-center border-2 border-dashed border-blue-300 rounded-xl p-6 cursor-pointer bg-white text-blue-400 hover:bg-blue-50">
+                <label className="flex flex-col items-center justify-center border-2 border-dashed border-primary-blue rounded-xl p-6 cursor-pointer bg-white text-primary-blue hover:bg-blue-50">
                   <span className="mb-2">+ Add some files</span>
                   <input
                     type="file"
@@ -739,7 +738,7 @@ function StepAnaKaynak({
           <div className="bg-gray-100 rounded-2xl p-8 mb-8">
             <div className="grid grid-cols-2 gap-8 mb-6">
               <div>
-                <label className="block text-gray-600 font-medium mb-2">
+                <label className="block text-primary-gray font-medium mb-2">
                   Proje Hakkında Kısa Açıklama
                 </label>
                 <textarea
@@ -755,10 +754,10 @@ function StepAnaKaynak({
                 />
               </div>
               <div>
-                <label className="block text-gray-600 font-medium mb-2">
+                <label className="block text-primary-gray font-medium mb-2">
                   Teaser Yükleyin
                 </label>
-                <label className="flex flex-col items-center justify-center border-2 border-dashed border-blue-300 rounded-xl p-6 cursor-pointer bg-white text-blue-400 hover:bg-blue-50">
+                <label className="flex flex-col items-center justify-center border-2 border-dashed border-primary-blue rounded-xl p-6 cursor-pointer bg-white text-primary-blue hover:bg-blue-50">
                   <span className="mb-2">+ Add some files</span>
                   <input
                     type="file"
@@ -779,7 +778,7 @@ function StepAnaKaynak({
           <div className="flex justify-end mt-8 mb-8">
             <button
               onClick={handleSubmit}
-              className="bg-blue-500 text-white rounded-xl px-10 py-3 text-lg font-medium hover:bg-blue-600 hover:cursor-pointer"
+              className="bg-primary-blue text-white rounded-xl px-10 py-3 text-lg font-medium hover:bg-blue-600 hover:cursor-pointer"
             >
               Gönder
             </button>
@@ -845,7 +844,6 @@ const ProjectFormPage: React.FC = () => {
     setAcceptanceInfo(acceptanceInfo.filter((_, i) => i !== index));
   };
 
-  console.log(formData);
 
   return (
     <div className="flex flex-col min-h-screen bg-white">

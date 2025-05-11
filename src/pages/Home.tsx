@@ -8,30 +8,7 @@ import { ExploreSection } from "../components/ExploreSection";
 import { Newsletter } from "../components/Newsletter";
 import { Footer } from "../components/Footer";
 
-const __Home = () => {
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const result = await client.fetch("projects", { method: "GET" });
-        const projects = await result.json();
-        setData(projects?.data ?? []);
-      } catch (error) {
-        console.error("Catched error");
-        console.error(error);
-        setData([]);
-      }
-    })();
-  }, []);
-
-  return (
-    <>
-      <div>Home</div>
-      <pre>{JSON.stringify(data)}</pre>
-    </>
-  );
-};
 
 function Home() {
   return (

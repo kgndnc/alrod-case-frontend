@@ -8,15 +8,15 @@ function ProjectPortfolio({ display }: { display: any }) {
       <div className="flex gap-4 overflow-x-auto pb-2">
         {/* First Card: Portfolio Overview */}
         <div className="min-w-[300px] max-w-[400px] h-[300px] bg-[#809fb885] px-8 rounded-lg p-6 relative flex flex-col justify-between">
-          <div className="font-semibold mb-2 text-lg text-gray-600">
+          <div className="font-semibold mb-2 text-lg text-primary-gray">
             Portföy Bilgileri
           </div>
           <div className="relative z-10 flex flex-col h-full justify-between">
             <div>
-              <div className="text-gray-600 font-bold text-3xl mb-4">
+              <div className="text-primary-gray font-bold text-3xl mb-4">
                 Kayseri Portföyü
               </div>
-              <div className="text-gray-500 text-sm mb-4 w-9/12">
+              <div className="text-primary-gray text-sm mb-4 w-9/12">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit diam
                 nonummy nibh eu dolore magna aliquam erat volutpat...
               </div>

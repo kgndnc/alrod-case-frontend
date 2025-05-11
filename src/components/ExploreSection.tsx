@@ -12,6 +12,7 @@ export const ExploreSection = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     async function fetchProjects() {
       try {
@@ -62,13 +63,13 @@ export const ExploreSection = () => {
   return (
     <section className="mb-20 text-[#5A5B5E]">
       <h2 className="text-4xl font-bold mb-8">
-        <span className="text-blue-500">explore</span>
-        <span className="text-gray-600"> project</span>
+        <span className="text-primary-blue">explore</span>
+        <span className="text-primary-gray"> project</span>
       </h2>
 
       <div className="grid grid-cols-[1fr_4fr] gap-6">
         <div className="max-w-xs">
-          <p className="text-gray-600 text-sm">
+          <p className="text-primary-gray text-sm">
             Lorem ipsum dolor sit amet consectetur. Elementum risus tempor at
             vivamus curabitur viverra diam nec.
           </p>
@@ -112,7 +113,7 @@ export const ExploreSection = () => {
 
                       <button
                         onClick={() => handleProjectClick(project.documentId)}
-                        className="bg-blue-500 text-white rounded-4xl px-10 py-4 text-sm w-30 hover:bg-blue-600 transition-colors"
+                        className="bg-primary-blue text-white rounded-4xl px-10 py-4 text-sm w-30 hover:bg-blue-500 cursor-pointer transition-colors"
                       >
                         İncele
                       </button>
@@ -124,7 +125,7 @@ export const ExploreSection = () => {
               {projects.length > 0 && (
                 <>
                   <button
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-blue-500 transition-all z-10"
+                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-primary-blue transition-all z-10"
                     onClick={() => {
                       const container =
                         document.querySelector(".overflow-x-auto");
@@ -148,7 +149,7 @@ export const ExploreSection = () => {
                   </button>
 
                   <button
-                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-blue-500 transition-all z-10"
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-primary-blue transition-all z-10"
                     onClick={() => {
                       const container =
                         document.querySelector(".overflow-x-auto");

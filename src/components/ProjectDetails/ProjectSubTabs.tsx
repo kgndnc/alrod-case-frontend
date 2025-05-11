@@ -10,8 +10,8 @@ function ProjectSubTabs({
       <button
         className={`w-full py-2 px-3 rounded-lg text-sm font-medium text-center mb-2 ${
           activeSubTab === "Ana Kaynak"
-            ? "bg-blue-400 text-white"
-            : "bg-blue-100 text-blue-400"
+            ? "bg-primary-blue text-white"
+            : "bg-blue-100 text-primary-blue"
         }`}
         onClick={() => setActiveSubTab("Ana Kaynak")}
       >
@@ -20,8 +20,8 @@ function ProjectSubTabs({
       <button
         className={`w-full py-2 px-3 rounded-lg text-sm font-medium text-center mb-2 ${
           activeSubTab === "Yardımcı Kaynak"
-            ? "bg-blue-400 text-white"
-            : "bg-blue-100 text-blue-400"
+            ? "bg-primary-blue text-white"
+            : "bg-blue-100 text-primary-blue"
         }`}
         onClick={() => setActiveSubTab("Yardımcı Kaynak")}
       >
@@ -30,8 +30,8 @@ function ProjectSubTabs({
       <button
         className={`w-full py-2 px-3 rounded-lg text-sm font-medium text-center ${
           activeSubTab === "Depolama"
-            ? "bg-blue-400 text-white"
-            : "bg-blue-100 text-blue-400"
+            ? "bg-primary-blue text-white"
+            : "bg-blue-100 text-primary-blue"
         }`}
         onClick={() => setActiveSubTab("Depolama")}
       >

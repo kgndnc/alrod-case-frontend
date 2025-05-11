@@ -12,7 +12,7 @@ function ProjectTabs({
       <button
         className={`py-2 text-left border-gray-300  ${
           activeTab === "Tesise İlişkin Bilgiler"
-            ? "text-blue-500"
+            ? "text-primary-blue"
             : "text-gray-400"
         }`}
         onClick={() => setActiveTab("Tesise İlişkin Bilgiler")}
@@ -21,7 +21,7 @@ function ProjectTabs({
       </button>
       <button
         className={`py-2  text-left  ${
-          activeTab === "Q&A" ? "text-blue-500" : "text-gray-400"
+          activeTab === "Q&A" ? "text-primary-blue" : "text-gray-400"
         }`}
         onClick={() => setActiveTab("Q&A")}
       >
