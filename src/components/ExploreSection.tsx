@@ -34,7 +34,7 @@ export const ExploreSection = () => {
   const getSourceIcon = (sourceType: string) => {
     switch (sourceType) {
       case "Rüzgar":
-        return <Wind size={64} />;
+        return <WindTurbineIcon className="w-10 h-10" />;
       case "Güneş":
         return <Sun size={64} />;
       case "Hidroelektrik":
@@ -60,7 +60,7 @@ export const ExploreSection = () => {
   };
 
   return (
-    <section className="mb-20">
+    <section className="mb-20 text-[#5A5B5E]">
       <h2 className="text-4xl font-bold mb-8">
         <span className="text-blue-500">explore</span>
         <span className="text-gray-600"> project</span>
@@ -75,7 +75,7 @@ export const ExploreSection = () => {
         </div>
 
         {/* Project Cards Row */}
-        <div className="overflow-hidden relative">
+        <div className="overflow-hidden relative px-12">
           {loading ? (
             <div>Yükleniyor...</div>
           ) : error ? (
@@ -87,7 +87,7 @@ export const ExploreSection = () => {
                   {projects.map((project) => (
                     <div
                       key={project.id}
-                      className="project-card flex-none w-[calc(33.33%-0.5rem)] snap-start flex h-64 justify-between flex-col bg-white rounded-lg py-4 px-6 shadow-sm"
+                      className="project-card flex-none w-[calc(33.33%-0.5rem)] min-w-[300px] snap-start flex h-64 justify-between flex-col bg-white rounded-lg py-4 px-6 shadow-sm"
                     >
                       <div className="title-container">
                         <h3 className="font-bold text-xl">
@@ -121,51 +121,57 @@ export const ExploreSection = () => {
                 </div>
               </div>
 
-              <button
-                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-blue-500 transition-all z-10"
-                onClick={() => {
-                  const container = document.querySelector(".overflow-x-auto");
-                  if (container)
-                    container.scrollBy({ left: -300, behavior: "smooth" });
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
+              {projects.length > 0 && (
+                <>
+                  <button
+                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-blue-500 transition-all z-10"
+                    onClick={() => {
+                      const container =
+                        document.querySelector(".overflow-x-auto");
+                      if (container)
+                        container.scrollBy({ left: -300, behavior: "smooth" });
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                  </button>
 
-              <button
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-blue-500 transition-all z-10"
-                onClick={() => {
-                  const container = document.querySelector(".overflow-x-auto");
-                  if (container)
-                    container.scrollBy({ left: 300, behavior: "smooth" });
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
+                  <button
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md text-blue-500 transition-all z-10"
+                    onClick={() => {
+                      const container =
+                        document.querySelector(".overflow-x-auto");
+                      if (container)
+                        container.scrollBy({ left: 300, behavior: "smooth" });
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </button>
+                </>
+              )}
             </>
           )}
         </div>

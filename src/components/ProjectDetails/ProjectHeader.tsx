@@ -20,13 +20,13 @@ function ProjectHeader({ display }: { display: any }) {
   const il = iller.find((il) => il.id === display.ilId)?.name;
 
   return (
-    <div className="bg-gray-100 rounded-2xl p-8 flex flex-row items-center justify-between mb-6">
+    <div className="bg-gray-100 rounded-2xl p-8 gap-4 flex flex-row items-center justify-between mb-6">
       <div className="flex items-start">
-        <div className="grid grid-rows-2 gap-4">
+        <div className="grid grid-rows-2 gap-2">
           <div className="flex">
-            <div className="mr-4">
+            <div className="mr-4 text-[#5A5B5E] fill-[#5A5B5E]">
               {display.sourceType === "Rüzgar" && (
-                <WindTurbineIcon className="w-16 h-16 fill-[#5A5B5E]" />
+                <WindTurbineIcon className="w-16 h-16 fill-current" />
               )}
               {display.sourceType === "Güneş" && <Sun className="w-16 h-16" />}
               {display.sourceType === "Biyokütle/Biyogaz" && (

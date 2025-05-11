@@ -14,7 +14,7 @@ const ilceData = il_ilce.ilceler;
 // Step 1: Welcome/Info
 function StepWelcome({ onNext }: { onNext: () => void }) {
   return (
-    <div className="w-full mx-auto m,[])-60">
+    <div className="w-full mx-auto mb-60">
       <h2 className="text-3xl font-semibold mb-12">
         <span className="text-blue-500">proje</span> bilgileriniz
       </h2>

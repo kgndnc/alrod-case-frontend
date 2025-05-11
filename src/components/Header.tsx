@@ -5,7 +5,7 @@ import { Link } from "react-router";
 export const Header: React.FC = () => (
   <header className="w-full py-4 px-6 flex justify-end items-center bg-white">
     <Link to="/projects/new" className="text-blue-500  px-6 py-2 mr-4">
-      Projeler
+      Proje Ekle
     </Link>
     <button className="bg-blue-500 text-white rounded-full px-6 py-2 mr-4">
       Sign In
