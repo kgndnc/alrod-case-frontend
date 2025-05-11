@@ -3,7 +3,7 @@ import LinkedInSVG from "../assets/LinkedInSVG";
 
 export const Footer = () => (
   <footer>
-    <div className="bg-gray-50 py-12 px-10 mt-auto">
+    <div className="bg-gray-50 py-12 px-10">
       <div className="container mx-auto">
         <div className="grid grid-cols-3 items-center w-fit mx-auto justify-center gap-28 mb-10">
           <div>

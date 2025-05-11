@@ -1,4 +1,4 @@
-import React, { useState, useCallback    } from "react";
+import React, { useState, useCallback } from "react";
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 import { client } from "../lib/strapi-client";
@@ -6,6 +6,7 @@ import il_ilce from "../data/il_ilce.json";
 import { Footer } from "../components/Footer";
 import { BatteryCharging, Bell, Factory, Folders } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import type { ProjectFormData, AcceptanceInfo } from "../types/project";
 
 const ilData = il_ilce.iller;
 const ilceData = il_ilce.ilceler;
@@ -13,7 +14,7 @@ const ilceData = il_ilce.ilceler;
 // Step 1: Welcome/Info
 function StepWelcome({ onNext }: { onNext: () => void }) {
   return (
-    <div className="w-full mx-auto m,[])-60">      
+    <div className="w-full mx-auto m,[])-60">
       <h2 className="text-3xl font-semibold mb-12">
         <span className="text-blue-500">proje</span> bilgileriniz
       </h2>
@@ -58,8 +59,8 @@ function StepBasicInfo({
   setFormData,
   onNext,
 }: {
-  formData: any;
-  setFormData: React.Dispatch<React.SetStateAction<any>>;
+  formData: ProjectFormData;
+  setFormData: React.Dispatch<React.SetStateAction<ProjectFormData>>;
   onNext: () => void;
 }) {
   const handleNext = useCallback(() => {
@@ -76,7 +77,7 @@ function StepBasicInfo({
       return;
     }
     onNext();
-  },[formData, onNext])  
+  }, [formData, onNext]);
 
   return (
     <div className="w-full max-w-7xl mx-auto mb-60">
@@ -122,7 +123,7 @@ function StepBasicInfo({
                   ...f,
                   facilityType: "Üretim Tesis",
                 }))
-              }              
+              }
             >
               <div className="">
                 <label className="flex items-center gap-2 mb-2" htmlFor="">
@@ -258,60 +259,29 @@ function StepBasicInfo({
 function StepAnaKaynak({
   formData,
   setFormData,
+  acceptanceInfo,
+  setAcceptanceInfo,
+  currentAcceptance,
+  setCurrentAcceptance,
+  handleAddAcceptance,
+  handleRemoveAcceptance,
   onSubmit,
 }: {
-  formData: any;
-  setFormData: React.Dispatch<React.SetStateAction<any>>;
+  formData: ProjectFormData;
+  setFormData: React.Dispatch<React.SetStateAction<ProjectFormData>>;
+  acceptanceInfo: AcceptanceInfo[];
+  setAcceptanceInfo: React.Dispatch<React.SetStateAction<AcceptanceInfo[]>>;
+  currentAcceptance: AcceptanceInfo;
+  setCurrentAcceptance: React.Dispatch<React.SetStateAction<AcceptanceInfo>>;
+  handleAddAcceptance: () => void;
+  handleRemoveAcceptance: (index: number) => void;
   onSubmit: () => void;
-}) {
+}): React.ReactElement {
   const [activeTab, setActiveTab] = useState("Ana Kaynak");
-
-  const [anaKaynakFormData, setAnaKaynakFormData] = useState({
-    sourceType: "Biyokütle/Biyogaz",
-    projectStatus: "Proje (sadece Lisans ya da Çağrı Mektubu alınmıştır)",
-    installedPower: "",
-    operationalPower: "",
-    powerUnit: "MWe",
-    katkiPayi: "Var",
-    katkiPayiValue: "",
-    ilId: "",
-    ilceId: "",
-    yekdemSonTarihi: new Date().getFullYear().toString(),
-  });
-
-  // Add new state for acceptance information
-  const [acceptanceInfo, setAcceptanceInfo] = useState<Array<{
-    date: string;
-    mwe: string;
-    mwm: string;
-  }>>([]);
-
-  // Add new state for current input values
-  const [currentAcceptance, setCurrentAcceptance] = useState({
-    date: "",
-    mwe: "",
-    mwm: "",
-  });
-
-  // Function to add new acceptance info
-  const handleAddAcceptance = () => {
-    if (currentAcceptance.date && currentAcceptance.mwe && currentAcceptance.mwm) {
-      setAcceptanceInfo([...acceptanceInfo, currentAcceptance]);
-      setCurrentAcceptance({ date: "", mwe: "", mwm: "" });
-    }
-  };
-
-  // Function to remove acceptance info
-  const handleRemoveAcceptance = (index: number) => {
-    setAcceptanceInfo(acceptanceInfo.filter((_, i) => i !== index));
-  };
-
   const navigate = useNavigate();
 
   // Add a submit handler
   const handleSubmit = async () => {
-    
-
     try {
       const projects = client.collection("projects");
 
@@ -388,20 +358,20 @@ function StepAnaKaynak({
                     Tesis/Proje Kaynak Türü
                   </label>
                   <select
-                    value={anaKaynakFormData.sourceType}
+                    value={formData.sourceType}
                     onChange={(e) =>
-                      setAnaKaynakFormData((f: any) => ({
+                      setFormData((f: any) => ({
                         ...f,
                         sourceType: e.target.value,
                       }))
                     }
                     className="w-full p-3 rounded-lg border border-gray-300"
                   >
-                    <option>Biyokütle/Biyogaz</option>
-                    <option>Güneş</option>
-                    <option>Rüzgar</option>
-                    <option>Hidroelektrik</option>
-                    <option>Jeotermal</option>
+                    <option value="Biyokütle/Biyogaz">Biyokütle/Biyogaz</option>
+                    <option value="Güneş">Güneş</option>
+                    <option value="Rüzgar">Rüzgar</option>
+                    <option value="Hidroelektrik">Hidroelektrik</option>
+                    <option value="Jeotermal">Jeotermal</option>
                   </select>
                 </div>
                 <div>
@@ -415,20 +385,20 @@ function StepAnaKaynak({
                     </span>
                   </label>
                   <select
-                    value={anaKaynakFormData.projectStatus}
+                    value={formData.projectStatus}
                     onChange={(e) =>
-                      setAnaKaynakFormData((f: any) => ({
+                      setFormData((f: any) => ({
                         ...f,
                         projectStatus: e.target.value,
                       }))
                     }
                     className="w-full p-3 rounded-lg border border-gray-300"
                   >
-                    <option>
+                    <option value="Proje (sadece Lisans ya da Çağrı Mektubu alınmıştır)">
                       Proje (sadece Lisans ya da Çağrı Mektubu alınmıştır)
                     </option>
-                    <option>İnşaat Halinde</option>
-                    <option>İşletmede</option>
+                    <option value="İnşaat Halinde">İnşaat Halinde</option>
+                    <option value="İşletmede">İşletmede</option>
                   </select>
                 </div>
               </div>
@@ -439,9 +409,9 @@ function StepAnaKaynak({
                   </label>
                   <div className="flex gap-2">
                     <input
-                      value={anaKaynakFormData.installedPower}
+                      value={formData.installedPower}
                       onChange={(e) =>
-                        setAnaKaynakFormData((f: any) => ({
+                        setFormData((f: any) => ({
                           ...f,
                           installedPower: e.target.value,
                         }))
@@ -468,9 +438,9 @@ function StepAnaKaynak({
                   </label>
                   <div className="flex gap-2">
                     <input
-                      value={anaKaynakFormData.operationalPower}
+                      value={formData.operationalPower}
                       onChange={(e) =>
-                        setAnaKaynakFormData((f: any) => ({
+                        setFormData((f: any) => ({
                           ...f,
                           operationalPower: e.target.value,
                         }))
@@ -584,11 +554,11 @@ function StepAnaKaynak({
                   <span className="text-gray-600 font-semibold text-right text-sm">
                     YEKDEM son yararlanma takvim yılı/dönemi
                   </span>
-                  <select 
+                  <select
                     className="p-3 rounded-lg border border-gray-300 w-32"
-                    value={anaKaynakFormData.yekdemSonTarihi}
+                    value={formData.yekdemSonTarihi}
                     onChange={(e) =>
-                      setAnaKaynakFormData((prev) => ({
+                      setFormData((prev: any) => ({
                         ...prev,
                         yekdemSonTarihi: e.target.value,
                       }))
@@ -621,6 +591,13 @@ function StepAnaKaynak({
                 <label className="flex items-center gap-2 bg-white rounded-lg p-8">
                   <input
                     type="checkbox"
+                    checked={formData.kapasiteArtisImkani}
+                    onChange={(e) =>
+                      setFormData((f: any) => ({
+                        ...f,
+                        kapasiteArtisImkani: e.target.checked,
+                      }))
+                    }
                     className="w-5 h-5 rounded border-2 border-gray-300"
                   />
                   <span className="text-gray-600 font-medium">
@@ -638,9 +615,9 @@ function StepAnaKaynak({
                       type="radio"
                       name="katkiPayi"
                       value="Var"
-                      checked={anaKaynakFormData.katkiPayi === "Var"}
+                      checked={formData.katkiPayi === "Var"}
                       onChange={(e) =>
-                        setAnaKaynakFormData((f: any) => ({
+                        setFormData((f: any) => ({
                           ...f,
                           katkiPayi: e.target.value,
                         }))
@@ -654,9 +631,9 @@ function StepAnaKaynak({
                       type="radio"
                       name="katkiPayi"
                       value="Yok"
-                      checked={anaKaynakFormData.katkiPayi === "Yok"}
+                      checked={formData.katkiPayi === "Yok"}
                       onChange={(e) =>
-                        setAnaKaynakFormData((f: any) => ({
+                        setFormData((f: any) => ({
                           ...f,
                           katkiPayi: e.target.value,
                         }))
@@ -669,7 +646,7 @@ function StepAnaKaynak({
               </div>
               <div
                 className={`${
-                  anaKaynakFormData.katkiPayi === "Var" ? "" : "opacity-50"
+                  formData.katkiPayi === "Var" ? "" : "opacity-50"
                 }`}
               >
                 <span className="block text-gray-600 font-medium mb-2">
@@ -678,14 +655,14 @@ function StepAnaKaynak({
                 <input
                   className="w-40 p-3 rounded-lg border border-gray-300"
                   placeholder="Birim Seçin"
-                  value={anaKaynakFormData.katkiPayiValue}
+                  value={formData.katkiPayiValue}
                   onChange={(e) =>
-                    setAnaKaynakFormData((f: any) => ({
+                    setFormData((f: any) => ({
                       ...f,
                       katkiPayiValue: e.target.value,
                     }))
                   }
-                  disabled={anaKaynakFormData.katkiPayi !== "Var"}
+                  disabled={formData.katkiPayi !== "Var"}
                 />
               </div>
             </div>
@@ -700,9 +677,9 @@ function StepAnaKaynak({
               <div className="flex gap-4">
                 <select
                   className="p-3 rounded-lg border border-gray-300 w-40"
-                  value={anaKaynakFormData.ilId}
+                  value={formData.ilId}
                   onChange={(e) =>
-                    setAnaKaynakFormData((f: any) => ({
+                    setFormData((f: any) => ({
                       ...f,
                       ilId: e.target.value,
                     }))
@@ -718,9 +695,9 @@ function StepAnaKaynak({
                 </select>
                 <select
                   className="p-3 rounded-lg border border-gray-300 w-40"
-                  value={anaKaynakFormData.ilceId}
+                  value={formData.ilceId}
                   onChange={(e) =>
-                    setAnaKaynakFormData((f: any) => ({
+                    setFormData((f: any) => ({
                       ...f,
                       ilceId: e.target.value,
                     }))
@@ -729,7 +706,7 @@ function StepAnaKaynak({
                   <option value={""}>İlçe Seçin</option>
                   {/* ilce data */}
                   {ilceData
-                    .filter((ilce) => ilce.il_id === anaKaynakFormData.ilId)
+                    .filter((ilce) => ilce.il_id === formData.ilId)
                     .map((ilce) => (
                       <option key={ilce.id} value={ilce.id}>
                         {ilce.name}
@@ -743,7 +720,16 @@ function StepAnaKaynak({
                 </label>
                 <label className="flex flex-col items-center justify-center border-2 border-dashed border-blue-300 rounded-xl p-6 cursor-pointer bg-white text-blue-400 hover:bg-blue-50">
                   <span className="mb-2">+ Add some files</span>
-                  <input type="file" className="hidden" />
+                  <input
+                    type="file"
+                    className="hidden"
+                    onChange={(e) =>
+                      setFormData((f: any) => ({
+                        ...f,
+                        kmzFile: e.target.files?.[0] || null,
+                      }))
+                    }
+                  />
                 </label>
               </div>
             </div>
@@ -774,14 +760,23 @@ function StepAnaKaynak({
                 </label>
                 <label className="flex flex-col items-center justify-center border-2 border-dashed border-blue-300 rounded-xl p-6 cursor-pointer bg-white text-blue-400 hover:bg-blue-50">
                   <span className="mb-2">+ Add some files</span>
-                  <input type="file" className="hidden" />
+                  <input
+                    type="file"
+                    className="hidden"
+                    onChange={(e) =>
+                      setFormData((f: any) => ({
+                        ...f,
+                        teaserFile: e.target.files?.[0] || null,
+                      }))
+                    }
+                  />
                 </label>
               </div>
             </div>
           </div>
 
           {/* Add a submit button at the end of the Ana Kaynak tab */}
-          <div className="flex justify-end mt-8">
+          <div className="flex justify-end mt-8 mb-8">
             <button
               onClick={handleSubmit}
               className="bg-blue-500 text-white rounded-xl px-10 py-3 text-lg font-medium hover:bg-blue-600 hover:cursor-pointer"
@@ -798,30 +793,59 @@ function StepAnaKaynak({
 // Main Multi-step Form Page
 const ProjectFormPage: React.FC = () => {
   const [step, setStep] = useState(0);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ProjectFormData>({
+    // Basic Info fields
     projectName: "",
     facilityType: "",
     stage: "",
+    description: "",
+
     // Ana Kaynak fields
     sourceType: "Biyokütle/Biyogaz",
     projectStatus: "Proje (sadece Lisans ya da Çağrı Mektubu alınmıştır)",
     installedPower: "",
     operationalPower: "",
-    kabulBilgisi: "",
-    kabulTarihi: "",
-    kabulMWe: "",
-    kabulMWm: "",
-    yekdemYil: new Date().getFullYear().toString(),
-    kapasiteArtisImkani: false,
-    katkiPayi: "",
+    powerUnit: "MWe",
+    katkiPayi: "Var",
     katkiPayiValue: "",
-    katkiPayiBirim: "",
-    il: "",
-    ilce: "",
+    ilId: "",
+    ilceId: "",
+    yekdemSonTarihi: new Date().getFullYear().toString(),
+    kapasiteArtisImkani: false,
+
+    // File fields
     kmzFile: null,
-    description: "",
     teaserFile: null,
   });
+
+  // Add new state for acceptance information
+  const [acceptanceInfo, setAcceptanceInfo] = useState<AcceptanceInfo[]>([]);
+
+  // Add new state for current input values
+  const [currentAcceptance, setCurrentAcceptance] = useState<AcceptanceInfo>({
+    date: "",
+    mwe: "",
+    mwm: "",
+  });
+
+  // Function to add new acceptance info
+  const handleAddAcceptance = () => {
+    if (
+      currentAcceptance.date &&
+      currentAcceptance.mwe &&
+      currentAcceptance.mwm
+    ) {
+      setAcceptanceInfo([...acceptanceInfo, currentAcceptance]);
+      setCurrentAcceptance({ date: "", mwe: "", mwm: "" });
+    }
+  };
+
+  // Function to remove acceptance info
+  const handleRemoveAcceptance = (index: number) => {
+    setAcceptanceInfo(acceptanceInfo.filter((_, i) => i !== index));
+  };
+
+  console.log(formData);
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -840,6 +864,12 @@ const ProjectFormPage: React.FC = () => {
           <StepAnaKaynak
             formData={formData}
             setFormData={setFormData}
+            acceptanceInfo={acceptanceInfo}
+            setAcceptanceInfo={setAcceptanceInfo}
+            currentAcceptance={currentAcceptance}
+            setCurrentAcceptance={setCurrentAcceptance}
+            handleAddAcceptance={handleAddAcceptance}
+            handleRemoveAcceptance={handleRemoveAcceptance}
             onSubmit={() => setStep(3)}
           />
         )}

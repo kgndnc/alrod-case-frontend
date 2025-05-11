@@ -13,25 +13,27 @@ import ProjectGallery from "../components/ProjectDetails/ProjectGallery";
 import ProjectPortfolio from "../components/ProjectDetails/ProjectPortfolio";
 import ProjectSeller from "../components/ProjectDetails/ProjectSeller";
 import { Footer } from "../components/Footer";
+import type { StrapiResponse, ProjectData } from "../types/project";
 
 const MOCK_PROJECT = {
   projectName: "Çamlıdere Projesi",
-  il: "Kayseri",
+  ilId: "38",
   description:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh eu dolore magna aliquam erat volutpat lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh eu dolore magna aliquam erat volutpat",
   installedPower: 64,
   kabulBilgisi: [
-    { date: "23.04.2024", power: "40 MWe" },
-    { date: "25.07.2024", power: "5 MWe" },
-    { date: "15.02.2025", power: "10 MWe" },
+    { date: "2024-04-23", mwe: "40" },
+    { date: "2024-07-25", mwe: "5" },
+    { date: "2025-02-15", mwe: "10" },
   ],
   elektrikSatisi: [
-    { date: "23.04.2024", power: "40 MWe" },
-    { date: "25.07.2024", power: "5 MWe" },
-    { date: "15.02.2025", power: "10 MWe" },
+    { date: "2024-04-23", mwe: "40" },
+    { date: "2024-07-25", mwe: "5" },
+    { date: "2025-02-15", mwe: "10" },
   ],
-  yekdemTarihi: "23.04.2024",
-  katkiPayi: "234.090,00",
+  yekdemYil: "2024-04-23",
+  katkiPayiValue: "234090",
+  sourceType: "Rüzgar",
   photos: [
     "https://images.unsplash.com/photo-1524252500348-1bb07b83f3be?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2luZCUyMGZhcm18ZW58MHx8MHx8fDA%3D",
     "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHdpbmQlMjBmYXJtfGVufDB8fDB8fHww",
@@ -64,8 +66,8 @@ const MOCK_PROJECT = {
 };
 
 const ProjectDetailsPage: React.FC = () => {
-  const { project_id} = useParams<{ project_id: string }>();
-  const [project, setProject] = useState<any>(null);
+  const { project_id } = useParams<{ project_id: string }>();
+  const [project, setProject] = useState<ProjectData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("Tesise İlişkin Bilgiler");
@@ -83,7 +85,7 @@ const ProjectDetailsPage: React.FC = () => {
           const res = await client.fetch(`projects/${project_id}`, {
             method: "GET",
           });
-          const data = await res.json();
+          const data: StrapiResponse = await res.json();
           setProject(data?.data ?? null);
         }
       } catch (err) {
@@ -99,28 +101,29 @@ const ProjectDetailsPage: React.FC = () => {
   // Use fetched data if available, otherwise mock data
   const display = project
     ? {
-        projectName: project.attributes?.projectName,
-        il: project.attributes?.details?.il,
-        description: project.attributes?.description,
-        installedPower: project.attributes?.details?.installedPower,
-        operationalPower: project.attributes?.details?.operationalPower,
-        facilityType: project.attributes?.details?.facilityType,
-        stage: project.attributes?.details?.stage,
-        sourceType: project.attributes?.details?.sourceType,
-        projectStatus: project.attributes?.details?.projectStatus,
-        kabulBilgisi: project.attributes?.details?.acceptanceInfo || [],
-        yekdemYil: project.attributes?.details?.yekdemYil,
-        kapasiteArtisImkani: project.attributes?.details?.kapasiteArtisImkani,
-        katkiPayi: project.attributes?.details?.katkiPayi,
-        katkiPayiValue: project.attributes?.details?.katkiPayiValue,
-        katkiPayiBirim: project.attributes?.details?.katkiPayiBirim,
-        ilce: project.attributes?.details?.ilce,
+        projectName: project.projectName,
+        ilId: project.details?.ilId,
+        description: project.description,
+        installedPower: project.details?.installedPower,
+        operationalPower: project.details?.operationalPower,
+        facilityType: project.details?.facilityType,
+        stage: project.details?.stage,
+        sourceType: project.details?.sourceType,
+        projectStatus: project.details?.projectStatus,
+        kabulBilgisi: project.details?.acceptanceInfo || [],
+        yekdemYil: project.details?.yekdemSonTarihi,
+        kapasiteArtisImkani: project.details?.kapasiteArtisImkani,
+        katkiPayi: project.details?.katkiPayi,
+        katkiPayiValue: project.details?.katkiPayiValue,
+        ilceId: project.details?.ilceId,
         photos: MOCK_PROJECT.photos,
         mainPhoto: MOCK_PROJECT.mainPhoto,
         portfolios: MOCK_PROJECT.portfolios,
         seller: MOCK_PROJECT.seller,
       }
     : MOCK_PROJECT;
+
+  console.log(display);
 
   return (
     <div className="bg-white">
@@ -135,7 +138,6 @@ const ProjectDetailsPage: React.FC = () => {
             <ProjectHeader display={display} />
 
             {/* Main Content with Side Tabs */}
-
             <section className="flex">
               {/* Left Side - Tabs */}
               <div className="w-48 flex flex-col mr-6">
@@ -179,8 +181,6 @@ const ProjectDetailsPage: React.FC = () => {
                 )}
               </div>
             </section>
-
-            {/* put here */}
 
             {activeTab === "Tesise İlişkin Bilgiler" &&
               activeSubTab === "Ana Kaynak" && (

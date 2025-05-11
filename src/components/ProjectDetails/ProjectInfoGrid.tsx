@@ -1,3 +1,4 @@
+import { Sun, Droplet, Flame, Wind } from "lucide-react";
 import WindTurbineIcon from "../../assets/WindTurbineIcon";
 
 function ProjectInfoGrid({ display }: { display: any }) {
@@ -6,10 +7,23 @@ function ProjectInfoGrid({ display }: { display: any }) {
       {/* Icon + Power */}
       <div className="flex items-start mr-10">
         <div className="mr-3">
-          <WindTurbineIcon className="w-14 h-14" />
+          {display.sourceType === "Rüzgar" && (
+            <WindTurbineIcon className="w-16 h-16 fill-[#5A5B5E]" />
+          )}
+          {display.sourceType === "Güneş" && <Sun className="w-16 h-16" />}
+          {display.sourceType === "Biyokütle/Biyogaz" && (
+            <Wind className="w-16 h-16" />
+          )}
+          {display.sourceType === "Hidroelektrik" && (
+            <Droplet className="w-16 h-16" />
+          )}
+          {display.sourceType === "Jeotermal" && (
+            <Flame className="w-16 h-16" />
+          )}
         </div>
         <div className="text-4xl font-bold pt-4">
-          64<span className="text-lg ml-1 font-normal">MWe</span>
+          {display.installedPower}
+          <span className="text-lg ml-1 font-normal">MWe</span>
         </div>
       </div>
 
@@ -22,12 +36,16 @@ function ProjectInfoGrid({ display }: { display: any }) {
           </div>
           <div className="text-gray-500 text-sm">İşletmede</div>
           <hr className="my-2 w-1/6 border-gray-500" />
-          {display?.kabulBilgisi?.map((item: any, index: any) => (
-            <div key={index} className="text-gray-500 font-normal text-sm">
-              {item.date}{" "}
-              <span className="ml-1 font-semibold">{item.power}</span>
-            </div>
-          ))}
+          {display?.kabulBilgisi?.map((item: any, index: any) => {
+            console.log(item);
+            return (
+              <div key={index} className="text-gray-500 font-normal text-sm">
+                {Intl.DateTimeFormat("tr-TR").format(new Date(item.date)) ??
+                  "Tarih yok"}{" "}
+                <span className="ml-1 font-semibold">{item.mwe} MWe</span>
+              </div>
+            );
+          })}
         </div>
 
         {/* Elektrik Satışı */}
@@ -37,8 +55,9 @@ function ProjectInfoGrid({ display }: { display: any }) {
           </div>
           {display?.elektrikSatisi?.map((item: any, index: any) => (
             <div key={index} className="text-gray-500 font-normal text-sm">
-              {item.date}{" "}
-              <span className="ml-1 font-semibold">{item.power}</span>
+              {Intl.DateTimeFormat("tr-TR").format(new Date(item.date)) ??
+                "Tarih yok"}{" "}
+              <span className="ml-1 font-semibold">{item.mwe} MWe</span>
             </div>
           ))}
         </div>

@@ -1,9 +1,23 @@
 import WindTurbineIcon from "../../assets/WindTurbineIcon";
-import { Download, MapPin, MessageSquare, SquarePen } from "lucide-react";
+import {
+  Download,
+  Droplet,
+  MapPin,
+  MessageSquare,
+  SquarePen,
+  Sun,
+  Wind,
+  Flame,
+} from "lucide-react";
 import { useState } from "react";
+import { iller } from "../../data/il_ilce.json";
 
+// "Rüzgar" | "Güneş" | "Biyokütle/Biyogaz" | "Hidroelektrik" | "Jeotermal"
+// Wind     | Sun     | "Rüzgar             | Droplet         | Droplet
 function ProjectHeader({ display }: { display: any }) {
   const [showMore, setShowMore] = useState(false);
+
+  const il = iller.find((il) => il.id === display.ilId)?.name;
 
   return (
     <div className="bg-gray-100 rounded-2xl p-8 flex flex-row items-center justify-between mb-6">
@@ -11,7 +25,19 @@ function ProjectHeader({ display }: { display: any }) {
         <div className="grid grid-rows-2 gap-4">
           <div className="flex">
             <div className="mr-4">
-              <WindTurbineIcon className="w-16 h-16 fill-[#5A5B5E]" />
+              {display.sourceType === "Rüzgar" && (
+                <WindTurbineIcon className="w-16 h-16 fill-[#5A5B5E]" />
+              )}
+              {display.sourceType === "Güneş" && <Sun className="w-16 h-16" />}
+              {display.sourceType === "Biyokütle/Biyogaz" && (
+                <Wind className="w-16 h-16" />
+              )}
+              {display.sourceType === "Hidroelektrik" && (
+                <Droplet className="w-16 h-16" />
+              )}
+              {display.sourceType === "Jeotermal" && (
+                <Flame className="w-16 h-16" />
+              )}
             </div>
 
             <div>
@@ -20,7 +46,10 @@ function ProjectHeader({ display }: { display: any }) {
               </h2>
               <div className="flex items-center text-2xl text-gray-500 mb-2">
                 <MapPin className="w-6 h-6 mr-2 text-[#48A0E2]" />
-                {display.il_id || "Şehir"}, Türkiye
+                {il
+                  ? il.charAt(0).toUpperCase() + il.slice(1).toLocaleLowerCase()
+                  : "Şehir"}
+                , Türkiye
               </div>
             </div>
           </div>

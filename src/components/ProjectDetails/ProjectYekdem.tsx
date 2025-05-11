@@ -10,14 +10,23 @@ function ProjectYekdem({ display }: { display: any }) {
           <div className="content text-sm flex text-gray-500 flex-row gap-7 items-center w-full">
             <div>
               <span className="text-gray-500 mr-3">Son Uzatma Tarihi</span>
-              <span className="font-bold">{display.yekdemTarihi}</span>
+              <span className="font-bold">
+                {Intl.DateTimeFormat("tr-TR").format(
+                  new Date(display.yekdemYil)
+                )}
+              </span>
             </div>
 
             <div className="h-6 w-[1px] bg-gray-500"></div>
 
             <div>
               <span className="text-gray-500 mr-3">Katkı Payı</span>
-              <span className="font-bold">{display.katkiPayi}</span>
+              <span className="font-bold">
+                {Intl.NumberFormat("tr-TR", {
+                  style: "currency",
+                  currency: "TRY",
+                }).format(display.katkiPayiValue)}
+              </span>
             </div>
           </div>
         </div>
