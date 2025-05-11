@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useCallback    } from "react";
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 import { client } from "../lib/strapi-client";
 import il_ilce from "../data/il_ilce.json";
 import { Footer } from "../components/Footer";
 import { BatteryCharging, Bell, Factory, Folders } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ilData = il_ilce.iller;
 const ilceData = il_ilce.ilceler;
@@ -12,7 +13,7 @@ const ilceData = il_ilce.ilceler;
 // Step 1: Welcome/Info
 function StepWelcome({ onNext }: { onNext: () => void }) {
   return (
-    <div className="w-full mx-auto mb-60">
+    <div className="w-full mx-auto m,[])-60">      
       <h2 className="text-3xl font-semibold mb-12">
         <span className="text-blue-500">proje</span> bilgileriniz
       </h2>
@@ -61,6 +62,22 @@ function StepBasicInfo({
   setFormData: React.Dispatch<React.SetStateAction<any>>;
   onNext: () => void;
 }) {
+  const handleNext = useCallback(() => {
+    if (formData.projectName === "") {
+      alert("Proje adı girilmedi");
+      return;
+    }
+    if (formData.facilityType === "") {
+      alert("Proje türü seçilmedi");
+      return;
+    }
+    if (formData.stage === "") {
+      alert("Proje aşaması seçilmedi");
+      return;
+    }
+    onNext();
+  },[formData, onNext])  
+
   return (
     <div className="w-full max-w-7xl mx-auto mb-60">
       <h2 className="text-3xl font-semibold mb-6 ml-2">
@@ -80,10 +97,12 @@ function StepBasicInfo({
             className="w-full indent-4 placeholder:text-sm placeholder:font-semibold p-4 rounded-xl border-2 bg-white border-gray-300 focus:outline-blue-400 text-lg"
             placeholder="Proje Adı"
             value={formData.projectName}
+            name="projectName"
+            id="projectName"
             onChange={(e) =>
               setFormData((f: any) => ({ ...f, projectName: e.target.value }))
             }
-            required
+            required={true}
           />
           <div></div>
           <div></div>
@@ -103,7 +122,7 @@ function StepBasicInfo({
                   ...f,
                   facilityType: "Üretim Tesis",
                 }))
-              }
+              }              
             >
               <div className="">
                 <label className="flex items-center gap-2 mb-2" htmlFor="">
@@ -223,7 +242,7 @@ function StepBasicInfo({
           {/* Third Column: Devam Button */}
           <div className="">
             <button
-              onClick={onNext}
+              onClick={handleNext}
               className="bg-blue-500 text-white rounded-xl px-10 py-3 text-lg font-medium hover:cursor-pointer"
             >
               Devam
@@ -257,39 +276,57 @@ function StepAnaKaynak({
     katkiPayiValue: "",
     ilId: "",
     ilceId: "",
+    yekdemSonTarihi: new Date().getFullYear().toString(),
   });
+
+  // Add new state for acceptance information
+  const [acceptanceInfo, setAcceptanceInfo] = useState<Array<{
+    date: string;
+    mwe: string;
+    mwm: string;
+  }>>([]);
+
+  // Add new state for current input values
+  const [currentAcceptance, setCurrentAcceptance] = useState({
+    date: "",
+    mwe: "",
+    mwm: "",
+  });
+
+  // Function to add new acceptance info
+  const handleAddAcceptance = () => {
+    if (currentAcceptance.date && currentAcceptance.mwe && currentAcceptance.mwm) {
+      setAcceptanceInfo([...acceptanceInfo, currentAcceptance]);
+      setCurrentAcceptance({ date: "", mwe: "", mwm: "" });
+    }
+  };
+
+  // Function to remove acceptance info
+  const handleRemoveAcceptance = (index: number) => {
+    setAcceptanceInfo(acceptanceInfo.filter((_, i) => i !== index));
+  };
+
+  const navigate = useNavigate();
 
   // Add a submit handler
   const handleSubmit = async () => {
-    const payload = {
-      data: {
-        ...formData,
-        sourceType: anaKaynakFormData.sourceType,
-        projectStatus: anaKaynakFormData.projectStatus,
-        installedPower: anaKaynakFormData.installedPower,
-        operationalPower: anaKaynakFormData.operationalPower,
-        katkiPayi: anaKaynakFormData.katkiPayi,
-        katkiPayiValue: anaKaynakFormData.katkiPayiValue,
-        ilId: anaKaynakFormData.ilId,
-        ilceId: anaKaynakFormData.ilceId,
-        // add other local state fields if needed
-      },
-    };
+    
 
     try {
       const projects = client.collection("projects");
 
       // Create a new project
       const newProject = await projects.create({
-        name: formData.projectName,
+        projectName: formData.projectName,
         description: formData.description,
-        details: { ...formData },
+        details: { ...formData, acceptanceInfo }, // Include acceptance info in details
       });
 
       console.log({ newProject });
 
       if (newProject.data.documentId) {
         alert("Proje başarıyla gönderildi!");
+        navigate("/");
       } else {
         alert("Gönderme başarısız: ");
       }
@@ -308,7 +345,7 @@ function StepAnaKaynak({
       <div className="flex items-center gap-2 mb-8 ml-2">
         <button
           data-active={activeTab === "Ana Kaynak"}
-          className={`tab px-8 py-2 rounded-tl-xl rounded-bl-xl text-white font-medium ${
+          className={`tab px-8 py-8 rounded-tl-xl rounded-bl-xl text-white font-medium ${
             activeTab === "Ana Kaynak"
               ? "bg-blue-400"
               : "bg-blue-100 text-blue-400"
@@ -319,7 +356,7 @@ function StepAnaKaynak({
         </button>
         <button
           data-active={activeTab === "Yardımcı Kaynak"}
-          className={`tab px-8 py-2 font-medium ${
+          className={`tab px-8 py-8 font-medium ${
             activeTab === "Yardımcı Kaynak"
               ? "bg-blue-400 text-white"
               : "bg-blue-100 text-blue-400"
@@ -330,7 +367,7 @@ function StepAnaKaynak({
         </button>
         <button
           data-active={activeTab === "BESS"}
-          className={`tab px-8 py-2 rounded-tr-xl rounded-br-xl font-medium ${
+          className={`tab px-8 py-8 rounded-tr-xl rounded-br-xl font-medium ${
             activeTab === "BESS"
               ? "bg-blue-400 text-white"
               : "bg-blue-100 text-blue-400"
@@ -472,20 +509,74 @@ function StepAnaKaynak({
                   <option>Kabul Bilgileri</option>
                   <option>Seçenek 1</option>
                 </select>
+                {/* Display existing acceptance info rows */}
+                {acceptanceInfo.map((info, index) => (
+                  <div key={index} className="flex gap-2 mb-4 items-center">
+                    <input
+                      type="date"
+                      value={info.date}
+                      disabled
+                      className="p-3 rounded-lg border border-gray-300 bg-gray-50"
+                    />
+                    <input
+                      value={info.mwe}
+                      disabled
+                      className="w-24 p-3 rounded-lg border border-gray-300 bg-gray-50"
+                      placeholder="MWe"
+                    />
+                    <input
+                      value={info.mwm}
+                      disabled
+                      className="w-24 p-3 rounded-lg border border-gray-300 bg-gray-50"
+                      placeholder="MWm"
+                    />
+                    <button
+                      onClick={() => handleRemoveAcceptance(index)}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      Sil
+                    </button>
+                  </div>
+                ))}
+                {/* Input row for new acceptance info */}
                 <div className="flex gap-2 mb-4">
                   <input
                     type="date"
+                    value={currentAcceptance.date}
+                    onChange={(e) =>
+                      setCurrentAcceptance((prev) => ({
+                        ...prev,
+                        date: e.target.value,
+                      }))
+                    }
                     className="p-3 rounded-lg border border-gray-300"
                   />
                   <input
+                    value={currentAcceptance.mwe}
+                    onChange={(e) =>
+                      setCurrentAcceptance((prev) => ({
+                        ...prev,
+                        mwe: e.target.value,
+                      }))
+                    }
                     className="w-24 p-3 rounded-lg border border-gray-300"
                     placeholder="MWe"
                   />
                   <input
+                    value={currentAcceptance.mwm}
+                    onChange={(e) =>
+                      setCurrentAcceptance((prev) => ({
+                        ...prev,
+                        mwm: e.target.value,
+                      }))
+                    }
                     className="w-24 p-3 rounded-lg border border-gray-300"
                     placeholder="MWm"
                   />
-                  <button className="bg-blue-400 text-white rounded-lg px-6 py-2 font-medium hover:cursor-pointer">
+                  <button
+                    onClick={handleAddAcceptance}
+                    className="bg-blue-400 text-white rounded-lg px-6 py-2 font-medium hover:cursor-pointer"
+                  >
                     Ekle
                   </button>
                 </div>
@@ -493,7 +584,16 @@ function StepAnaKaynak({
                   <span className="text-gray-600 font-semibold text-right text-sm">
                     YEKDEM son yararlanma takvim yılı/dönemi
                   </span>
-                  <select className="p-3 rounded-lg border border-gray-300 w-32">
+                  <select 
+                    className="p-3 rounded-lg border border-gray-300 w-32"
+                    value={anaKaynakFormData.yekdemSonTarihi}
+                    onChange={(e) =>
+                      setAnaKaynakFormData((prev) => ({
+                        ...prev,
+                        yekdemSonTarihi: e.target.value,
+                      }))
+                    }
+                  >
                     {Array.from(
                       { length: 21 },
                       (_, i) => new Date().getFullYear() + i

@@ -14,6 +14,7 @@ import ProjectDetailsPage from "./pages/ProjectDetailsPage";
   - il / ilçe seçimi data (DONE)
   - fix home page (DONE)
   - fix form (WIP 🚧👷‍♂️)
+  - list project details on card click
   - add new font (font-poppins) and preset color to tailwind.config.ts 
   - make sidebar buttons functional (LATER)
   - make final touches and fixes

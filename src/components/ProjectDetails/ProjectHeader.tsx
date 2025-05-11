@@ -16,11 +16,11 @@ function ProjectHeader({ display }: { display: any }) {
 
             <div>
               <h2 className="text-3xl text-[#5A5B5E] font-bold mb-2">
-                {display.name || "Proje Adı"}
+                {display.projectName || "Proje Adı"}
               </h2>
               <div className="flex items-center text-2xl text-gray-500 mb-2">
                 <MapPin className="w-6 h-6 mr-2 text-[#48A0E2]" />
-                {display.il || "Şehir"}, Türkiye
+                {display.il_id || "Şehir"}, Türkiye
               </div>
             </div>
           </div>

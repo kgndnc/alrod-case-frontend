@@ -15,7 +15,7 @@ import ProjectSeller from "../components/ProjectDetails/ProjectSeller";
 import { Footer } from "../components/Footer";
 
 const MOCK_PROJECT = {
-  name: "Çamlıdere Projesi",
+  projectName: "Çamlıdere Projesi",
   il: "Kayseri",
   description:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh eu dolore magna aliquam erat volutpat lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh eu dolore magna aliquam erat volutpat",
@@ -64,7 +64,7 @@ const MOCK_PROJECT = {
 };
 
 const ProjectDetailsPage: React.FC = () => {
-  const { project_id } = useParams<{ project_id: string }>();
+  const { project_id} = useParams<{ project_id: string }>();
   const [project, setProject] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -77,11 +77,15 @@ const ProjectDetailsPage: React.FC = () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await client.fetch(`projects/${project_id}`, {
-          method: "GET",
-        });
-        const data = await res.json();
-        setProject(data?.data ?? null);
+        if (project_id === "example") {
+          setProject(null); // This will trigger the mock data display
+        } else {
+          const res = await client.fetch(`projects/${project_id}`, {
+            method: "GET",
+          });
+          const data = await res.json();
+          setProject(data?.data ?? null);
+        }
       } catch (err) {
         setError("Proje bulunamadı veya bir hata oluştu.");
       } finally {
@@ -95,14 +99,22 @@ const ProjectDetailsPage: React.FC = () => {
   // Use fetched data if available, otherwise mock data
   const display = project
     ? {
-        name: project.attributes?.name,
+        projectName: project.attributes?.projectName,
         il: project.attributes?.details?.il,
         description: project.attributes?.description,
         installedPower: project.attributes?.details?.installedPower,
-        kabulBilgisi: MOCK_PROJECT.kabulBilgisi, // Fallback to mock data
-        elektrikSatisi: MOCK_PROJECT.elektrikSatisi, // Fallback to mock data
-        yekdemTarihi: project.attributes?.details?.yekdemTarihi,
-        katkiPayi: project.attributes?.details?.katkiPayiValue,
+        operationalPower: project.attributes?.details?.operationalPower,
+        facilityType: project.attributes?.details?.facilityType,
+        stage: project.attributes?.details?.stage,
+        sourceType: project.attributes?.details?.sourceType,
+        projectStatus: project.attributes?.details?.projectStatus,
+        kabulBilgisi: project.attributes?.details?.acceptanceInfo || [],
+        yekdemYil: project.attributes?.details?.yekdemYil,
+        kapasiteArtisImkani: project.attributes?.details?.kapasiteArtisImkani,
+        katkiPayi: project.attributes?.details?.katkiPayi,
+        katkiPayiValue: project.attributes?.details?.katkiPayiValue,
+        katkiPayiBirim: project.attributes?.details?.katkiPayiBirim,
+        ilce: project.attributes?.details?.ilce,
         photos: MOCK_PROJECT.photos,
         mainPhoto: MOCK_PROJECT.mainPhoto,
         portfolios: MOCK_PROJECT.portfolios,
