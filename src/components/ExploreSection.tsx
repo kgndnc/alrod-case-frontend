@@ -2,7 +2,7 @@ import { Wind, Droplet, Sun, Flame } from "lucide-react";
 import WindTurbineIcon from "../assets/WindTurbineIcon";
 import { useEffect, useState } from "react";
 import { client } from "../lib/strapi-client";
-import type { StrapiResponse, ProjectData } from "../types/project";
+import type { ProjectData } from "../types/project";
 import { iller } from "../data/il_ilce.json";
 import { useNavigate } from "react-router-dom";
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 const WindTurbineIcon = ({ className }: { className?: string }) => (
   <svg
     fill="#000000"

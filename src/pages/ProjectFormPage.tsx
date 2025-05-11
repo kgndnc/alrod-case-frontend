@@ -260,12 +260,12 @@ function StepAnaKaynak({
   formData,
   setFormData,
   acceptanceInfo,
-  setAcceptanceInfo,
+
   currentAcceptance,
   setCurrentAcceptance,
   handleAddAcceptance,
   handleRemoveAcceptance,
-  onSubmit,
+
 }: {
   formData: ProjectFormData;
   setFormData: React.Dispatch<React.SetStateAction<ProjectFormData>>;
