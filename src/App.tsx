@@ -18,6 +18,7 @@ import ProjectDetailsPage from "./pages/ProjectDetailsPage";
   - add new font (font-poppins) and preset color to tailwind (DONE) 
   - make sidebar buttons functional (LATER)
   - make final touches and fixes
+  - fix project card width issue in slider at homepage
 	- deploy (ship it 🚀 :D)
 */
 

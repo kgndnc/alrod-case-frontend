@@ -88,7 +88,7 @@ export const ExploreSection = () => {
                   {projects.map((project) => (
                     <div
                       key={project.id}
-                      className="project-card flex-none w-[calc(33.33%-0.5rem)] min-w-[300px] snap-start flex h-64 justify-between flex-col bg-white rounded-lg py-4 px-6 shadow-sm"
+                      className="project-card flex-none w-[280px] snap-start flex h-64 justify-between flex-col bg-white rounded-lg py-4 px-6 shadow-sm"
                     >
                       <div className="title-container">
                         <h3 className="font-bold text-xl">
